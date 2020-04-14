@@ -73,6 +73,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         frmB.txtIdCliente.setText(null);
         frmB.txtNombre.setText(null);
         frmB.txtTelefono.setText(null);
+        frmB.txtNombre.requestFocus();
     }
 
     @Override
@@ -101,6 +102,9 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
             }
         };
 
+        frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+        frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        frmA.tblTabla.requestFocus();
         ResultSet rs = clienteModel.mostrarCliente();
 
         try {
@@ -122,7 +126,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void keyReleased(KeyEvent e) {
         String columnas[] = {"ID", "Nombre", "Teléfono", "Dirección", "Correo"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
@@ -165,7 +169,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     break;
 
                 case "Editar":
-                    if (frmA.tblTabla.getSelectedRow() == 1) {
+                    if (frmA.tblTabla.getSelectedRowCount() == 1) {
 
                         opcion = 2;
                         frmB.setTitle("Actualización de Cliente");
@@ -186,11 +190,11 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     break;
 
                 case "Eliminar":
-                    if (frmA.tblTabla.getSelectedRow() == 1) {
+                    if (frmA.tblTabla.getSelectedRowCount() == 1) {
 
                         int fila = frmA.tblTabla.getSelectedRow();
                         cliente.setIdCliente(Integer.parseInt(frmA.tblTabla.getValueAt(fila, 0).toString()));
-                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el cliente " + cliente.getIdCliente() + "?");
+                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el cliente " + cliente.getIdCliente() + "?", "Seleccionar una Opción", 0);
 
                         if (resp == 0) {
                             if (clienteModel.eliminarCliente(cliente.getIdCliente())) {
@@ -281,7 +285,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyTyped(KeyEvent e) {
     }
 
     @Override
