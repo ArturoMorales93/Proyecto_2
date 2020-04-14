@@ -46,7 +46,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         this.clienteModel = clienteModel;
         this.frmA = frmA;
         this.frmB = frmB;
-
+        
         //Componentes del FrameA
         this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);

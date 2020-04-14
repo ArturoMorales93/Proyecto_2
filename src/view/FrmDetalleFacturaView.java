@@ -9,12 +9,12 @@ package view;
  *
  * @author Arthur
  */
-public class FrmOrdenTrabajoView extends javax.swing.JDialog {
+public class FrmDetalleFacturaView extends javax.swing.JDialog {
 
     /**
      * Creates new form FrmClienteView
      */
-    public FrmOrdenTrabajoView(java.awt.Frame parent, boolean modal) {
+    public FrmDetalleFacturaView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -38,8 +38,6 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
         lblCantidadRegistros = new javax.swing.JLabel();
-        lblInfo = new javax.swing.JLabel();
-        lblTexto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Ordenes de Trabajo");
@@ -51,7 +49,7 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
 
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBuscar.setText("Filtrar por OC o ID Empleado");
+        txtBuscar.setText("Filtrar por ID de Detalle");
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setPreferredSize(new java.awt.Dimension(124, 54));
@@ -120,10 +118,6 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
 
         lblCantidadRegistros.setText("Cantidad de registros: ");
 
-        lblInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
-
-        lblTexto.setText("Para acceder a los detalles de una Orden, haga doble click sobre el registro.");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -135,10 +129,6 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCantidadRegistros)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblTexto)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -150,11 +140,7 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCantidadRegistros)
-                        .addComponent(lblInfo))
-                    .addComponent(lblTexto, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(lblCantidadRegistros)
                 .addContainerGap())
         );
 
@@ -178,14 +164,26 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmOrdenTrabajoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDetalleFacturaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmOrdenTrabajoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDetalleFacturaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmOrdenTrabajoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDetalleFacturaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmOrdenTrabajoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmDetalleFacturaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -194,7 +192,7 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmOrdenTrabajoView dialog = new FrmOrdenTrabajoView(new javax.swing.JFrame(), true);
+                FrmDetalleFacturaView dialog = new FrmDetalleFacturaView(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -215,8 +213,6 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblCantidadRegistros;
-    private javax.swing.JLabel lblInfo;
-    private javax.swing.JLabel lblTexto;
     public javax.swing.JTable tblTabla;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
