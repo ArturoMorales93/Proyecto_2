@@ -1,2 +1,2 @@
 # Proyecto_2
-Proyecto Curso de Programació II
+Proyecto Curso de Programación II
