@@ -99,5 +99,16 @@ public class OrdenTrabajoModel {
 
         return rs;
     }
+    
+    public ResultSet filtrarOrdenTrabajo(String texto) {
+
+        DataBase db = new DataBase();
+        ResultSet rs;
+
+        db.ejecutarSqlSelect("Select * from ordenDeTrabajo where idOrden like '%" + texto + "%' or idEmpleado like '%" + texto + "%'");
+        rs = db.obtenerRegistro();
+
+        return rs;
+    }
 
 }

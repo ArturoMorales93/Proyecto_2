@@ -99,5 +99,16 @@ public class DetalleFacturaModel {
 
         return rs;
     }
+    
+    public ResultSet filtrarCliente(String texto) {
+
+        DataBase db = new DataBase();
+        ResultSet rs;
+
+        db.ejecutarSqlSelect("Select * from cliente where idCliente like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        rs = db.obtenerRegistro();
+
+        return rs;
+    }
 
 }

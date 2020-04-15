@@ -50,6 +50,9 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         //Componentes del FrameA
         this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);
+        this.frmA.lblTexto.setVisible(false);
+        this.frmA.lblInfo.setVisible(false);
+        this.frmA.lblInfo.addMouseListener(this);
         this.frmA.tblTabla.requestFocus();
         this.frmA.tblTabla.getTableHeader().setResizingAllowed(false);
         this.frmA.tblTabla.getTableHeader().setReorderingAllowed(false);
@@ -302,10 +305,12 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        frmA.lblTexto.setVisible(true);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        frmA.lblTexto.setVisible(false);
     }
 
 }

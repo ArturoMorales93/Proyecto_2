@@ -6,6 +6,7 @@
 package view;
 
 import controller.ClienteController;
+import controller.OrdenTrabajoController;
 import java.awt.Graphics;
 import java.awt.Image;
 import javaBeans.Cliente;
@@ -34,7 +35,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     Cliente cliente = new Cliente();
     Factura factura = new Factura();
     Empleado empleado = new Empleado();
-    OrdenTrabajo oc = new OrdenTrabajo();
+    OrdenTrabajo ordenTrabajo = new OrdenTrabajo();
     Mantenimiento mante = new Mantenimiento();
 
     //Models
@@ -42,7 +43,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     ClienteModel clienteModel = new ClienteModel();
     FacturaModel facturaModel = new FacturaModel();
     EmpleadoModel empleadoModel = new EmpleadoModel();
-    OrdenTrabajoModel ocModel = new OrdenTrabajoModel();
+    OrdenTrabajoModel ordenTrabajoModel = new OrdenTrabajoModel();
     MantenimientoModel manteModel = new MantenimientoModel();
 
     //Frames A
@@ -52,7 +53,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     FrmFacturacionView winFacturacionA = new FrmFacturacionView(this, false);
     FrmOrdenTrabajoView winOrdenTrabajoA = new FrmOrdenTrabajoView(this, false);
     FrmMantenimientoView winMantenimientoA = new FrmMantenimientoView(this, false);
-    
+
     //Frames B
     FrmNuevoEquipoView winEquiposB = new FrmNuevoEquipoView(this, true);
     FrmNuevoClienteView winClientesB = new FrmNuevoClienteView(this, true);
@@ -60,7 +61,6 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     FrmNuevoFacturaView winFacturacionB = new FrmNuevoFacturaView(this, true);
     FrmNuevoOrdenTrabajoView winOrdenTrabajoB = new FrmNuevoOrdenTrabajoView(this, true);
     FrmNuevoMantenimientoView winMantenimientoB = new FrmNuevoMantenimientoView(this, true);
-    
 
     /**
      * Creates new form FrmTiendaElectronica
@@ -226,7 +226,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
 
     private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         ClienteController controller = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
-        
+
         winClientesA.setVisible(true);
     }//GEN-LAST:event_btnClientesActionPerformed
 
@@ -241,7 +241,8 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEmpleadosActionPerformed
 
     private void btnOrdenTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenTrabajoActionPerformed
-          
+        OrdenTrabajoController controller = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
+
         winOrdenTrabajoA.setVisible(true);
     }//GEN-LAST:event_btnOrdenTrabajoActionPerformed
 

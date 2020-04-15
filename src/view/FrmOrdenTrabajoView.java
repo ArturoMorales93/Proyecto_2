@@ -215,8 +215,8 @@ public class FrmOrdenTrabajoView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblCantidadRegistros;
-    private javax.swing.JLabel lblInfo;
-    private javax.swing.JLabel lblTexto;
+    public javax.swing.JLabel lblInfo;
+    public javax.swing.JLabel lblTexto;
     public javax.swing.JTable tblTabla;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

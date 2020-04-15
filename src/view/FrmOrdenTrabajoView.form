@@ -219,11 +219,17 @@
           <Image iconType="3" name="/img/info.png"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTexto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Para acceder a los detalles de una Orden, haga doble click sobre el registro."/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
