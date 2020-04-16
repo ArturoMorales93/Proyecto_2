@@ -99,13 +99,13 @@ public class FacturaModel {
 
         return rs;
     }
-    
-    public ResultSet filtrarCliente(String texto) {
+
+    public ResultSet filtrarFactura(String texto) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from cliente where idCliente like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from factura where idFactura like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

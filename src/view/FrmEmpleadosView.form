@@ -32,6 +32,10 @@
                   <Component id="jPanel2" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblCantidadRegistros" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblInfo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblTexto" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -47,7 +51,13 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblCantidadRegistros" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblCantidadRegistros" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="lblInfo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTexto" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -178,10 +188,11 @@
             <Component class="javax.swing.JTable" name="tblTabla">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
+                  <Table columnCount="4" rowCount="4">
                     <Column editable="true" title="Title 1" type="java.lang.Object"/>
                     <Column editable="true" title="Title 2" type="java.lang.Object"/>
                     <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -196,6 +207,24 @@
     <Component class="javax.swing.JLabel" name="lblCantidadRegistros">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cantidad de registros: "/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblInfo">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/info.png"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTexto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Haga doble click sobre un registro para seleccionarlo."/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

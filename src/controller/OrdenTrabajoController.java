@@ -106,8 +106,11 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     //Metodos
     public void limpiarFrmB() {
         frmOrdenB.txtCliente.setText(null);
+        frmOrdenB.txtNombreCliente.setText(null);
         frmOrdenB.txtEmpleado.setText(null);
+        frmOrdenB.txtNombreEmpleado.setText(null);
         frmOrdenB.txtEquipo.setText(null);
+        frmOrdenB.txtMarca.setText(null);
         frmOrdenB.txtTotal.setText(null);
         frmOrdenB.btnBuscarCliente.requestFocus();
     }

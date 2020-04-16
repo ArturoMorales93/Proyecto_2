@@ -100,12 +100,12 @@ public class MantenimientoModel {
         return rs;
     }
     
-    public ResultSet filtrarCliente(String texto) {
+    public ResultSet filtrarMantenimiento(String texto) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from cliente where idCliente like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from mantenimiento where idMantenimiento like '%" + texto + "%' or descripcion like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

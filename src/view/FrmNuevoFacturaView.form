@@ -64,7 +64,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="txtEmpleado" min="-2" pref="35" max="-2" attributes="0"/>
@@ -86,16 +87,8 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                          <Component id="txtSubTotal" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Component id="txtImpuesto" max="32767" attributes="0"/>
                               </Group>
                               <Component id="txtFecha" alignment="1" pref="92" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
@@ -113,7 +106,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="txtImpuesto" max="32767" attributes="0"/>
+                                  <Component id="txtSubTotal" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
@@ -166,7 +159,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNombreEmpleado" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtImpuesto" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -187,7 +180,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtImpuesto" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSubTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -238,7 +231,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="SubTotal:"/>
+            <Property name="text" type="java.lang.String" value="Impuesto:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -319,17 +312,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="&#x20a1;"/>
+            <Property name="text" type="java.lang.String" value="%"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="%"/>
+            <Property name="text" type="java.lang.String" value="&#x20a1;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Impuesto:"/>
+            <Property name="text" type="java.lang.String" value="SubTotal:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
@@ -342,12 +335,12 @@
             <Property name="text" type="java.lang.String" value="Total:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtSubTotal">
+        <Component class="javax.swing.JTextField" name="txtImpuesto">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtImpuesto">
+        <Component class="javax.swing.JTextField" name="txtSubTotal">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

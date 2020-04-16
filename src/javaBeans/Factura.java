@@ -11,41 +11,41 @@ import java.io.Serializable;
  *
  * @author Arthur
  */
-public class Factura implements Serializable{
-    
+public class Factura implements Serializable {
+
     //Atributos
     private int idFactura;
     private String fecha;
-    private String empleado;
     private int idOrden;
-    private int subTotal;
-    private int impuesto;
-    private int total;
+    private String idEmpleado;
     private int idCliente;
-    
+    private int impuesto;
+    private int subTotal;
+    private int total;
+
     //Constructores
     public Factura() {
         this.idFactura = 0;
         this.fecha = null;
-        this.empleado = null;
         this.idOrden = 0;
-        this.subTotal = 0;
-        this.impuesto = 0;
-        this.total = 0;
+        this.idEmpleado = null;
         this.idCliente = 0;
+        this.impuesto = 0;
+        this.subTotal = 0;
+        this.total = 0;
     }
 
-    public Factura(int idFactura, String fecha, String empleado, int idOrden, int subTotal, int impuesto, int total, int idCliente) {
+    public Factura(int idFactura, String fecha, int idOrden, String idEmpleado, int idCliente, int impuesto, int subTotal, int total) {
         this.idFactura = idFactura;
         this.fecha = fecha;
-        this.empleado = empleado;
         this.idOrden = idOrden;
-        this.subTotal = subTotal;
-        this.impuesto = impuesto;
-        this.total = total;
+        this.idEmpleado = idEmpleado;
         this.idCliente = idCliente;
+        this.impuesto = impuesto;
+        this.subTotal = subTotal;
+        this.total = total;
     }
-    
+
     //Getters y setters
     public int getIdFactura() {
         return idFactura;
@@ -63,14 +63,6 @@ public class Factura implements Serializable{
         this.fecha = fecha;
     }
 
-    public String getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(String empleado) {
-        this.empleado = empleado;
-    }
-
     public int getIdOrden() {
         return idOrden;
     }
@@ -79,12 +71,20 @@ public class Factura implements Serializable{
         this.idOrden = idOrden;
     }
 
-    public int getSubTotal() {
-        return subTotal;
+    public String getIdEmpleado() {
+        return idEmpleado;
     }
 
-    public void setSubTotal(int subTotal) {
-        this.subTotal = subTotal;
+    public void setIdEmpleado(String idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
 
     public int getImpuesto() {
@@ -95,6 +95,14 @@ public class Factura implements Serializable{
         this.impuesto = impuesto;
     }
 
+    public int getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(int subTotal) {
+        this.subTotal = subTotal;
+    }
+
     public int getTotal() {
         return total;
     }
@@ -103,12 +111,4 @@ public class Factura implements Serializable{
         this.total = total;
     }
 
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-    
 }

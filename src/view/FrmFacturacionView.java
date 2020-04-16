@@ -51,7 +51,7 @@ public class FrmFacturacionView extends javax.swing.JDialog {
 
         txtBuscar.setForeground(new java.awt.Color(204, 204, 204));
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtBuscar.setText("Filtrar por ID o Nombre");
+        txtBuscar.setText("Filtrar por ID de Factura");
 
         btnNuevo.setText("Nuevo");
         btnNuevo.setPreferredSize(new java.awt.Dimension(124, 54));

@@ -100,12 +100,12 @@ public class DetalleOrdenModel {
         return rs;
     }
     
-    public ResultSet filtrarCliente(String texto) {
+    public ResultSet filtrarDetalleOrden(String texto) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from cliente where idCliente like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from detalleOrden where idDetalleOrden like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

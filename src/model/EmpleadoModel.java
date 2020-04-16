@@ -100,12 +100,12 @@ public class EmpleadoModel {
         return rs;
     }
     
-    public ResultSet filtrarCliente(String texto) {
+    public ResultSet filtrarEmpleado(String texto) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from cliente where idCliente like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from empleado where idEmpleado like '%" + texto + "%' or nombreDeEmpleado like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

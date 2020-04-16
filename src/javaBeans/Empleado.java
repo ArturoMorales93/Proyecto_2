@@ -17,18 +17,21 @@ public class Empleado implements Serializable {
     private String idEmpleado;
     private String nombreEmpleado;
     private String tipoEmpleado;
+    private int codigoEmpresarial;
 
     //Constructores
     public Empleado() {
         this.idEmpleado = null;
         this.nombreEmpleado = null;
         this.tipoEmpleado = null;
+        this.codigoEmpresarial = 0;
     }
 
-    public Empleado(String idEmpleado, String nombreEmpleado, String tipoEmpleado) {
+    public Empleado(String idEmpleado, String nombreEmpleado, String tipoEmpleado, int codigoEmpresarial) {
         this.idEmpleado = idEmpleado;
         this.nombreEmpleado = nombreEmpleado;
         this.tipoEmpleado = tipoEmpleado;
+        this.codigoEmpresarial = codigoEmpresarial;
     }
 
     //Getters y setters
@@ -54,6 +57,14 @@ public class Empleado implements Serializable {
 
     public void setTipoEmpleado(String tipoEmpleado) {
         this.tipoEmpleado = tipoEmpleado;
+    }
+
+    public int getCodigoEmpresarial() {
+        return codigoEmpresarial;
+    }
+
+    public void setCodigoEmpresarial(int codigoEmpresarial) {
+        this.codigoEmpresarial = codigoEmpresarial;
     }
 
 }

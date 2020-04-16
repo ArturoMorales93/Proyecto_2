@@ -50,8 +50,8 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtSubTotal = new javax.swing.JTextField();
         txtImpuesto = new javax.swing.JTextField();
+        txtSubTotal = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -77,7 +77,7 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
         txtCliente.setEditable(false);
         txtCliente.setFocusable(false);
 
-        jLabel3.setText("SubTotal:");
+        jLabel3.setText("Impuesto:");
 
         jLabel5.setText("Fecha:");
 
@@ -107,11 +107,11 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
         txtNombreCliente.setEditable(false);
         txtNombreCliente.setFocusable(false);
 
-        jLabel7.setText("₡");
+        jLabel7.setText("%");
 
-        jLabel8.setText("%");
+        jLabel8.setText("₡");
 
-        jLabel4.setText("Impuesto:");
+        jLabel4.setText("SubTotal:");
 
         jLabel9.setText("₡");
 
@@ -127,7 +127,8 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,13 +145,8 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(txtSubTotal))))
+                                .addGap(6, 6, 6)
+                                .addComponent(txtImpuesto))
                             .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel9)
@@ -164,7 +160,7 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtImpuesto)))
+                                .addComponent(txtSubTotal)))
                         .addGap(150, 150, 150)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -204,7 +200,7 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -221,7 +217,7 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtImpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)

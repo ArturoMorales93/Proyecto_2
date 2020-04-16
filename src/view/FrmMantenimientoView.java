@@ -40,6 +40,8 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
         lblCantidadRegistros = new javax.swing.JLabel();
+        lblInfo = new javax.swing.JLabel();
+        lblTexto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Mantenimiento");
@@ -120,6 +122,10 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
 
         lblCantidadRegistros.setText("Cantidad de registros: ");
 
+        lblInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
+
+        lblTexto.setText("Haga doble click sobre un registro para seleccionarlo.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,6 +137,10 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCantidadRegistros)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTexto)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -142,7 +152,11 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCantidadRegistros)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCantidadRegistros)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblInfo)
+                        .addComponent(lblTexto, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addContainerGap())
         );
 
@@ -203,6 +217,8 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JLabel lblCantidadRegistros;
+    public javax.swing.JLabel lblInfo;
+    public javax.swing.JLabel lblTexto;
     public javax.swing.JTable tblTabla;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
