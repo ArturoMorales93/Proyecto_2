@@ -122,7 +122,7 @@ public class FrmMantenimientoView extends javax.swing.JDialog {
 
         lblCantidadRegistros.setText("Cantidad de registros: ");
 
-        lblInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
+        lblInfo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/infoJam.png"))); // NOI18N
 
         lblTexto.setText("Haga doble click sobre un registro para seleccionarlo.");
 
