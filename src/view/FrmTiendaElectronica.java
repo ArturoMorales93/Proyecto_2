@@ -5,62 +5,16 @@
  */
 package view;
 
-import controller.ClienteController;
-import controller.OrdenTrabajoController;
 import java.awt.Graphics;
 import java.awt.Image;
-import javaBeans.Cliente;
-import javaBeans.Empleado;
-import javaBeans.Equipo;
-import javaBeans.Factura;
-import javaBeans.Mantenimiento;
-import javaBeans.OrdenTrabajo;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import model.ClienteModel;
-import model.EmpleadoModel;
-import model.EquipoModel;
-import model.FacturaModel;
-import model.MantenimientoModel;
-import model.OrdenTrabajoModel;
 
 /**
  *
  * @author Arthur
  */
 public class FrmTiendaElectronica extends javax.swing.JFrame {
-
-    //JavaBeans
-    Equipo equipo = new Equipo();
-    Cliente cliente = new Cliente();
-    Factura factura = new Factura();
-    Empleado empleado = new Empleado();
-    OrdenTrabajo ordenTrabajo = new OrdenTrabajo();
-    Mantenimiento mante = new Mantenimiento();
-
-    //Models
-    EquipoModel equipoModel = new EquipoModel();
-    ClienteModel clienteModel = new ClienteModel();
-    FacturaModel facturaModel = new FacturaModel();
-    EmpleadoModel empleadoModel = new EmpleadoModel();
-    OrdenTrabajoModel ordenTrabajoModel = new OrdenTrabajoModel();
-    MantenimientoModel manteModel = new MantenimientoModel();
-
-    //Frames A
-    FrmEquiposView winEquiposA = new FrmEquiposView(this, false);
-    FrmClientesView winClientesA = new FrmClientesView(this, false);
-    FrmEmpleadosView winEmpleadosA = new FrmEmpleadosView(this, false);
-    FrmFacturacionView winFacturacionA = new FrmFacturacionView(this, false);
-    FrmOrdenTrabajoView winOrdenTrabajoA = new FrmOrdenTrabajoView(this, false);
-    FrmMantenimientoView winMantenimientoA = new FrmMantenimientoView(this, false);
-
-    //Frames B
-    FrmNuevoEquipoView winEquiposB = new FrmNuevoEquipoView(this, true);
-    FrmNuevoClienteView winClientesB = new FrmNuevoClienteView(this, true);
-    FrmNuevoEmpleadoView winEmpleadosB = new FrmNuevoEmpleadoView(this, true);
-    FrmNuevoFacturaView winFacturacionB = new FrmNuevoFacturaView(this, true);
-    FrmNuevoOrdenTrabajoView winOrdenTrabajoB = new FrmNuevoOrdenTrabajoView(this, true);
-    FrmNuevoMantenimientoView winMantenimientoB = new FrmNuevoMantenimientoView(this, true);
 
     /**
      * Creates new form FrmTiendaElectronica
@@ -103,57 +57,27 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
 
         btnEquipos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnEquipos.setText("Equipos");
         btnEquipos.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnEquipos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEquiposActionPerformed(evt);
-            }
-        });
 
         btnEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnEmpleados.setText("Empleados");
         btnEmpleados.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEmpleadosActionPerformed(evt);
-            }
-        });
 
         btnFacturacion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnFacturacion.setText("Facturación");
         btnFacturacion.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnFacturacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFacturacionActionPerformed(evt);
-            }
-        });
 
         btnMantenimiento.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mantenimiento.png"))); // NOI18N
         btnMantenimiento.setText("Mantenimiento");
         btnMantenimiento.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnMantenimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMantenimientoActionPerformed(evt);
-            }
-        });
 
         btnOrdenTrabajo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnOrdenTrabajo.setText("Orden de trabajo");
         btnOrdenTrabajo.setPreferredSize(new java.awt.Dimension(150, 70));
-        btnOrdenTrabajo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOrdenTrabajoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,38 +148,6 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        ClienteController controller = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
-
-        winClientesA.setVisible(true);
-    }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void btnEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEquiposActionPerformed
-
-        winEquiposA.setVisible(true);
-    }//GEN-LAST:event_btnEquiposActionPerformed
-
-    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
-
-        winEmpleadosA.setVisible(true);
-    }//GEN-LAST:event_btnEmpleadosActionPerformed
-
-    private void btnOrdenTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenTrabajoActionPerformed
-        OrdenTrabajoController controller = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
-
-        winOrdenTrabajoA.setVisible(true);
-    }//GEN-LAST:event_btnOrdenTrabajoActionPerformed
-
-    private void btnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMantenimientoActionPerformed
-
-        winMantenimientoA.setVisible(true);
-    }//GEN-LAST:event_btnMantenimientoActionPerformed
-
-    private void btnFacturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturacionActionPerformed
-
-        winFacturacionA.setVisible(true);
-    }//GEN-LAST:event_btnFacturacionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -292,12 +184,12 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnClientes;
-    private javax.swing.JButton btnEmpleados;
-    private javax.swing.JButton btnEquipos;
-    private javax.swing.JButton btnFacturacion;
-    private javax.swing.JButton btnMantenimiento;
-    private javax.swing.JButton btnOrdenTrabajo;
+    public javax.swing.JButton btnClientes;
+    public javax.swing.JButton btnEmpleados;
+    public javax.swing.JButton btnEquipos;
+    public javax.swing.JButton btnFacturacion;
+    public javax.swing.JButton btnMantenimiento;
+    public javax.swing.JButton btnOrdenTrabajo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
