@@ -96,6 +96,12 @@ public class MainController implements ActionListener {
         OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
     }
 
+    //Metodos
+    public void iniciarVista(){
+        this.winTiendaElectronica.setLocationRelativeTo(null);
+        this.winTiendaElectronica.setVisible(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 

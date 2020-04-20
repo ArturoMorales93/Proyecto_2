@@ -21,7 +21,6 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
      */
     public FrmTiendaElectronica() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**

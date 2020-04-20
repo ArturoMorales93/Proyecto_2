@@ -31,7 +31,7 @@ public class ClaseMain {
 
     public static void main(String[] args) {
         MainController mainController = new MainController(winTiendaElectronica, winEquiposView, winClientesView, winEmpleadosView, winFacturacionView, winOrdenTrabajoView, winMantenimientoView);
-        winTiendaElectronica.setVisible(true);
+        mainController.iniciarVista();
     }
 
 }
