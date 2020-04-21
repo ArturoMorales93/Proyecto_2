@@ -35,12 +35,12 @@ public class ClaseMain {
         }
 
         FrmTiendaElectronica winTiendaElectronica = new FrmTiendaElectronica();
-        FrmEquiposView winEquiposView = new FrmEquiposView(winTiendaElectronica, true);
-        FrmClientesView winClientesView = new FrmClientesView(winTiendaElectronica, true);
-        FrmEmpleadosView winEmpleadosView = new FrmEmpleadosView(winTiendaElectronica, true);
-        FrmFacturacionView winFacturacionView = new FrmFacturacionView(winTiendaElectronica, true);
-        FrmOrdenTrabajoView winOrdenTrabajoView = new FrmOrdenTrabajoView(winTiendaElectronica, true);
-        FrmMantenimientoView winMantenimientoView = new FrmMantenimientoView(winTiendaElectronica, true);
+        FrmEquiposView winEquiposView = new FrmEquiposView(winTiendaElectronica, false);
+        FrmClientesView winClientesView = new FrmClientesView(winTiendaElectronica, false);
+        FrmEmpleadosView winEmpleadosView = new FrmEmpleadosView(winTiendaElectronica, false);
+        FrmFacturacionView winFacturacionView = new FrmFacturacionView(winTiendaElectronica, false);
+        FrmOrdenTrabajoView winOrdenTrabajoView = new FrmOrdenTrabajoView(winTiendaElectronica, false);
+        FrmMantenimientoView winMantenimientoView = new FrmMantenimientoView(winTiendaElectronica, false);
 
         MainController mainController = new MainController(winTiendaElectronica, winEquiposView, winClientesView, winEmpleadosView, winFacturacionView, winOrdenTrabajoView, winMantenimientoView);
         mainController.iniciarVista();

@@ -93,6 +93,7 @@ public class MainController implements ActionListener {
 
         //Controllers
         ClienteController clienteController = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
+        FacturaController facturaController = new FacturaController(factura, facturaModel, winFacturacionA, winFacturacionB);
         OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
     }
 

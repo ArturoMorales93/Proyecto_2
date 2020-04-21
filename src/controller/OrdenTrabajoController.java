@@ -82,6 +82,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
     //Controllers
     ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
+    DetalleOrdenController detalleOrdenController = new DetalleOrdenController(detalleOrden, detalleOrdenModel, frmDetalleOrdenA, frmDetalleOrdenB);
 
     //Constructor
     public OrdenTrabajoController(OrdenTrabajo ordenTrabajo, OrdenTrabajoModel ordenTrabajoModel, FrmOrdenTrabajoView frmOrdenTrabajoA, FrmNuevoOrdenTrabajoView frmOrdenTrabajoB) {
@@ -154,6 +155,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
         frmOrdenTrabajoA.txtBuscar.setText("Filtrar por OC o ID Empleado");
         frmOrdenTrabajoA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        frmOrdenTrabajoA.lblTexto.setVisible(false);
         frmOrdenTrabajoA.tblTabla.requestFocus();
         ResultSet rs = ordenTrabajoModel.mostrarOrdenTrabajo();
 

@@ -19,22 +19,26 @@ import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Cliente;
+import javaBeans.DetalleFactura;
 import javaBeans.Empleado;
 import javaBeans.OrdenTrabajo;
 import javaBeans.Factura;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ClienteModel;
+import model.DetalleFacturaModel;
 import model.EmpleadoModel;
 import model.OrdenTrabajoModel;
 import model.FacturaModel;
 import view.FrmClientesView;
+import view.FrmDetalleFacturaView;
 import view.FrmEmpleadosView;
 import view.FrmOrdenTrabajoView;
 import view.FrmNuevoClienteView;
 import view.FrmNuevoEmpleadoView;
 import view.FrmNuevoOrdenTrabajoView;
 import view.FrmFacturacionView;
+import view.FrmNuevoDetalleFacturaView;
 import view.FrmNuevoFacturaView;
 
 /**
@@ -56,24 +60,29 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
     Cliente cliente = new Cliente();
     Empleado empleado = new Empleado();
     OrdenTrabajo ordenTrabajo = new OrdenTrabajo();
+    DetalleFactura detalleFactura = new DetalleFactura();
 
     //Models
     ClienteModel clienteModel = new ClienteModel();
     EmpleadoModel empleadoModel = new EmpleadoModel();
     OrdenTrabajoModel ordenTrabajoModel = new OrdenTrabajoModel();
+    DetalleFacturaModel detalleFacturaModel = new DetalleFacturaModel();
 
     //Frames A
     FrmClientesView frmClientesA = new FrmClientesView(null, true);
     FrmEmpleadosView frmEmpleadosA = new FrmEmpleadosView(null, true);
     FrmOrdenTrabajoView frmOrdenTrabajosA = new FrmOrdenTrabajoView(null, true);
+    FrmDetalleFacturaView frmDetalleFacturaA = new FrmDetalleFacturaView(null, true);
 
     //Frames B
     FrmNuevoClienteView frmClientesB = new FrmNuevoClienteView(null, true);
     FrmNuevoEmpleadoView frmEmpleadosB = new FrmNuevoEmpleadoView(null, true);
     FrmNuevoOrdenTrabajoView frmOrdenTrabajosB = new FrmNuevoOrdenTrabajoView(null, true);
+    FrmNuevoDetalleFacturaView frmDetalleFacturaB = new FrmNuevoDetalleFacturaView(null, true);
 
     //Controllers
     ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
+    OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, frmOrdenTrabajosA, frmOrdenTrabajosB);
 
     //Constructor
     public FacturaController(Factura factura, FacturaModel facturaModel, FrmFacturacionView frmFacturaA, FrmNuevoFacturaView frmFacturaB) {
@@ -85,6 +94,8 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         //Componentes del FrameA
         this.frmFacturaA.setLocationRelativeTo(null);
         this.frmFacturaA.addWindowListener(this);
+        this.frmFacturaA.lblInfo.addMouseListener(this);
+        this.frmFacturaA.lblTexto.setVisible(false);
         this.frmFacturaA.tblTabla.requestFocus();
         this.frmFacturaA.tblTabla.getTableHeader().setResizingAllowed(false);
         this.frmFacturaA.tblTabla.getTableHeader().setReorderingAllowed(false);
@@ -146,6 +157,7 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
         frmFacturaA.txtBuscar.setText("Filtrar por ID de Factura");
         frmFacturaA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        frmFacturaA.lblTexto.setVisible(false);
         frmFacturaA.tblTabla.requestFocus();
         ResultSet rs = facturaModel.mostrarFactura();
 
@@ -302,6 +314,19 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
             }
 
             if (e.getSource() == frmFacturaB.btnBuscarOrden) {
+                frmOrdenTrabajosA.btnNuevo.setVisible(false);
+                frmOrdenTrabajosA.btnEditar.setVisible(false);
+                frmOrdenTrabajosA.btnEliminar.setVisible(false);
+                frmOrdenTrabajosA.tblTabla.addMouseListener(this);
+                frmOrdenTrabajosA.lblTexto.setText("Haga doble click sobre un registro para seleccionarlo.");
+
+                frmOrdenTrabajosA.setLocationRelativeTo(frmFacturaB.btnBuscarCliente);
+                frmOrdenTrabajosA.setVisible(true);
+            }
+            if (e.getSource() == frmFacturaB.btnBuscarEmpleado) {
+
+            }
+            if (e.getSource() == frmFacturaB.btnBuscarCliente) {
                 frmClientesA.lblInfo.setVisible(true);
                 frmClientesA.btnNuevo.setVisible(false);
                 frmClientesA.btnEditar.setVisible(false);
@@ -311,12 +336,6 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                 frmClientesA.setLocationRelativeTo(frmFacturaB.btnBuscarCliente);
                 frmClientesA.setVisible(true);
             }
-            if (e.getSource() == frmFacturaB.btnBuscarEmpleado) {
-
-            }
-            if (e.getSource() == frmFacturaB.btnBuscarCliente) {
-
-            }
         }
 
     }
@@ -324,6 +343,22 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
+            
+            if (e.getSource() == frmFacturaA.tblTabla) {
+                
+            }
+
+            if (e.getSource() == frmOrdenTrabajosA.tblTabla) {
+
+                int fila = frmOrdenTrabajosA.tblTabla.getSelectedRow();
+                frmFacturaB.txtOrdenTrabajo.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
+                frmClientesA.dispose();
+
+            }
+
+            if (e.getSource() == frmEmpleadosA.tblTabla) {
+
+            }
 
             if (e.getSource() == frmClientesA.tblTabla) {
 
@@ -379,10 +414,12 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        frmFacturaA.lblTexto.setVisible(true);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        frmFacturaA.lblTexto.setVisible(false);
     }
 
 }

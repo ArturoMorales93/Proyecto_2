@@ -65,6 +65,7 @@ public class FrmNuevoDetalleOrdenView extends javax.swing.JDialog {
         jLabel6.setText("Orden de Trabajo:");
 
         btnBuscarOrden.setText("...");
+        btnBuscarOrden.setEnabled(false);
 
         btnBuscarMantenimiento.setText("...");
 
