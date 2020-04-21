@@ -11,6 +11,7 @@ import view.FrmEmpleadosView;
 import view.FrmEquiposView;
 import view.FrmFacturacionView;
 import view.FrmMantenimientoView;
+import view.FrmNuevoMantenimientoView;
 import view.FrmOrdenTrabajoView;
 import view.FrmTiendaElectronica;
 

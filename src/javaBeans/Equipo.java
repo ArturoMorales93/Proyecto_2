@@ -18,6 +18,7 @@ public class Equipo implements Serializable {
     private String descripcion;
     private String marca;
     private int idCliente;
+    private String nombreCliente;
 
     //Constructores
     public Equipo() {
@@ -27,11 +28,12 @@ public class Equipo implements Serializable {
         this.idCliente = 0;
     }
 
-    public Equipo(int idEquipo, String descripcion, String marca, int idCliente) {
+    public Equipo(int idEquipo, String descripcion, String marca, int idCliente , String NombreCliente) {
         this.idEquipo = idEquipo;
         this.descripcion = descripcion;
         this.marca = marca;
         this.idCliente = idCliente;
+        this.nombreCliente = NombreCliente;
     }
 
     //Getters y setters
@@ -65,6 +67,14 @@ public class Equipo implements Serializable {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
 }

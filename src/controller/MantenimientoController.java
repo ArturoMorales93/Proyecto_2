@@ -19,34 +19,31 @@ import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Cliente;
-import javaBeans.Equipo;
+import javaBeans.Mantenimiento;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.ClienteModel;
-import model.EquipoModel;
-import view.FrmClientesView;
-import view.FrmEquiposView;
-import view.FrmNuevoClienteView;
-import view.FrmNuevoEquipoView;
+import model.MantenimientoModel;
+import view.FrmMantenimientoView;
+import view.FrmNuevoMantenimientoView;
 
 /**
  *
- * @author Arthur
+ * @author Daniel-san
  */
-public class ClienteController implements WindowListener, ActionListener, KeyListener, MouseListener, FocusListener {
+public class MantenimientoController implements WindowListener, ActionListener, KeyListener, MouseListener, FocusListener {
 
-    //Atributos
-    private Cliente cliente;
-    private ClienteModel clienteModel;
-    private FrmClientesView frmA;
-    private FrmNuevoClienteView frmB;
+    private Mantenimiento mantenimiento;
+    private MantenimientoModel manModel;
+    private FrmMantenimientoView frmA;
+    private FrmNuevoMantenimientoView frmB;
+
     private DefaultTableModel modelo;
     private int opcion;
 
     //Constructor
-    public ClienteController(Cliente cliente, ClienteModel clienteModel, FrmClientesView frmA, FrmNuevoClienteView frmB) {
-        this.cliente = cliente;
-        this.clienteModel = clienteModel;
+    public MantenimientoController(Mantenimiento mantenimiento, MantenimientoModel manModel, FrmMantenimientoView frmA, FrmNuevoMantenimientoView frmB) {
+        this.mantenimiento = mantenimiento;
+        this.manModel = manModel;
         this.frmA = frmA;
         this.frmB = frmB;
 
@@ -64,7 +61,6 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         this.frmA.btnEliminar.addActionListener(this);
         this.frmA.txtBuscar.addKeyListener(this);
         this.frmA.txtBuscar.addFocusListener(this);
-       // this.frmA.tblTabla.addMouseListener(this);
 
         //Componentes del FrameB
         this.frmB.setLocationRelativeTo(null);
@@ -75,12 +71,10 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     //Metodos
     public void limpiarFrmB() {
-        frmB.txtCorreo.setText(null);
-        frmB.txtDireccion.setText(null);
-        frmB.txtIdCliente.setText(null);
-        frmB.txtNombre.setText(null);
-        frmB.txtTelefono.setText(null);
-        frmB.txtNombre.requestFocus();
+        frmB.txtCodigoMantenimiento.setText(null);
+        frmB.txaDescripcion.setText(null);
+        frmB.txtPrecio.setText(null);
+        frmB.txtCodigoMantenimiento.requestFocus();
     }
 
     @Override
@@ -101,7 +95,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void windowActivated(WindowEvent e) {
-        String columnas[] = {"ID", "Nombre", "Teléfono", "Dirección", "Correo"};
+        String columnas[] = {"ID Manteniento", "Descripcción", "Precio"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -112,15 +106,14 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         frmA.txtBuscar.setText("Filtrar por ID o Nombre");
         frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmA.tblTabla.requestFocus();
-        ResultSet rs = clienteModel.mostrarCliente();
+        ResultSet rs = manModel.mostrarMantenimiento();
 
         try {
 
             if (rs.isFirst()) {
                 do {
-                    cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                    Object newRow[] = {cliente.getIdCliente(), cliente.getNombreCliente(), cliente.getNumeroTelefono(),
-                        cliente.getDireccion(), cliente.getEmail()};
+                    mantenimiento = new Mantenimiento(rs.getString(1), rs.getString(2), rs.getInt(3));
+                    Object newRow[] = {mantenimiento.getIdMantenimiento(), mantenimiento.getDescripcion(), mantenimiento.getPrecio()};
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -134,7 +127,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void keyReleased(KeyEvent e) {
-        String columnas[] = {"ID", "Nombre", "Teléfono", "Dirección", "Correo"};
+       String columnas[] = {"ID Manteniento", "Descripcción", "Precio"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -142,15 +135,15 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
             }
         };
 
-        ResultSet rs = clienteModel.filtrarCliente(frmA.txtBuscar.getText().trim());
+        ResultSet rs = manModel.filtrarMantenimiento(frmA.txtBuscar.getText().trim());
 
         try {
 
             if (rs.isFirst()) {
                 do {
-                    cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                    Object newRow[] = {cliente.getIdCliente(), cliente.getNombreCliente(), cliente.getNumeroTelefono(),
-                        cliente.getDireccion(), cliente.getEmail()};
+                    mantenimiento = new Mantenimiento(rs.getString(1), rs.getString(2), rs.getInt(3));
+                    Object newRow[] = {mantenimiento.getIdMantenimiento(), mantenimiento.getDescripcion(), mantenimiento.getPrecio()};
+                    modelo.addRow(newRow);
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -164,14 +157,14 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (frmA.isActive()) { //Botones del FrameA
             switch (e.getActionCommand()) {
 
                 case "Nuevo":
                     opcion = 1;
-                    frmB.setTitle("Registro de Cliente");
+                    frmB.setTitle("Registro de Mantenimiento");
                     limpiarFrmB();
+                    frmB.txtCodigoMantenimiento.setEnabled(true);
                     frmB.setVisible(true);
                     break;
 
@@ -182,12 +175,10 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                         frmB.setTitle("Actualización de Cliente");
                         int fila = frmA.tblTabla.getSelectedRow();
 
-                        frmB.txtIdCliente.setEnabled(false);
-                        frmB.txtIdCliente.setText(frmA.tblTabla.getValueAt(fila, 0).toString());
-                        frmB.txtNombre.setText(frmA.tblTabla.getValueAt(fila, 1).toString());
-                        frmB.txtTelefono.setText(frmA.tblTabla.getValueAt(fila, 2).toString());
-                        frmB.txtDireccion.setText(frmA.tblTabla.getValueAt(fila, 3).toString());
-                        frmB.txtCorreo.setText(frmA.tblTabla.getValueAt(fila, 4).toString());
+                        frmB.txtCodigoMantenimiento.setEnabled(false);
+                        frmB.txtCodigoMantenimiento.setText(frmA.tblTabla.getValueAt(fila, 0).toString());
+                        frmB.txaDescripcion.setText(frmA.tblTabla.getValueAt(fila, 1).toString());
+                        frmB.txtPrecio.setText(frmA.tblTabla.getValueAt(fila, 2).toString());
 
                         frmB.setVisible(true);
 
@@ -200,12 +191,12 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     if (frmA.tblTabla.getSelectedRowCount() == 1) {
 
                         int fila = frmA.tblTabla.getSelectedRow();
-                        cliente.setIdCliente(Integer.parseInt(frmA.tblTabla.getValueAt(fila, 0).toString()));
-                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el cliente " + cliente.getIdCliente() + "?", "Seleccionar una Opción", 0);
+                        mantenimiento.setIdMantenimiento(String.valueOf(frmA.tblTabla.getValueAt(fila, 0)));
+                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el mantenimiento " + mantenimiento.getIdMantenimiento() + "?", "Seleccionar una Opción", 0);
 
                         if (resp == 0) {
-                            if (clienteModel.eliminarCliente(cliente.getIdCliente())) {
-                                JOptionPane.showMessageDialog(frmA, "Cliente eliminado");
+                            if (manModel.eliminarMantenimiento(mantenimiento.getIdMantenimiento())) {
+                                JOptionPane.showMessageDialog(frmA, "Mantenimiento eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }
@@ -224,25 +215,24 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
                 case "Guardar":
                     try {
-                    cliente.setIdCliente(Integer.parseInt(frmB.txtIdCliente.getText()));
-                    cliente.setNombreCliente(frmB.txtNombre.getText().trim());
-                    cliente.setNumeroTelefono(Integer.parseInt(frmB.txtTelefono.getText().trim()));
-                    cliente.setDireccion(frmB.txtDireccion.getText().trim());
-                    cliente.setEmail(frmB.txtCorreo.getText().trim());
+                    mantenimiento.setIdMantenimiento(frmB.txtCodigoMantenimiento.getText().trim());
+                    mantenimiento.setDescripcion(frmB.txaDescripcion.getText().trim());
+                    mantenimiento.setPrecio(Integer.parseInt(frmB.txtPrecio.getText().trim()));
+                   
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
                 }
 
                 if (opcion == 1) {
-                    if (clienteModel.insertarCliente(cliente)) {
-                        JOptionPane.showMessageDialog(frmB, "Cliente Registrado");
+                    if (manModel.insertarMantenimiento(mantenimiento)) {
+                        JOptionPane.showMessageDialog(frmB, "Mantenimiento Registrado");
                         frmB.dispose();
                     } else {
                         JOptionPane.showMessageDialog(frmB, "Error al guardar");
                     }
                 } else {
-                    if (clienteModel.modificarCliente(cliente)) {
-                        JOptionPane.showMessageDialog(frmB, "Cliente Actualizado");
+                    if (manModel.modificarMantenimiento(mantenimiento)) {
+                        JOptionPane.showMessageDialog(frmB, "Mantenimiento Actualizado");
                         frmB.dispose();
                     } else {
                         JOptionPane.showMessageDialog(frmB, "Error al editar");

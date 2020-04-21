@@ -14,29 +14,29 @@ import java.io.Serializable;
 public class Mantenimiento implements Serializable {
 
     //Atributos
-    private int idMantenimiento;
+    private String idMantenimiento;
     private String descripcion;
     private int precio;
 
     //Constructores
     public Mantenimiento() {
-        this.idMantenimiento = 0;
-        this.descripcion = null;
+        this.idMantenimiento = "";
+        this.descripcion = "";
         this.precio = 0;
     }
 
-    public Mantenimiento(int idMantenimiento, String descripcion, int precio) {
+    public Mantenimiento(String idMantenimiento, String descripcion, int precio) {
         this.idMantenimiento = idMantenimiento;
         this.descripcion = descripcion;
         this.precio = precio;
     }
 
     //Getters y setters
-    public int getIdMantenimiento() {
+    public String getIdMantenimiento() {
         return idMantenimiento;
     }
 
-    public void setIdMantenimiento(int idMantenimiento) {
+    public void setIdMantenimiento(String idMantenimiento) {
         this.idMantenimiento = idMantenimiento;
     }
 

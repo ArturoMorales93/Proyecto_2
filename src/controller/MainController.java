@@ -94,6 +94,8 @@ public class MainController implements ActionListener {
         //Controllers
         ClienteController clienteController = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
         OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
+        MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, winMantenimientoA, winMantenimientoB);
+        EquiposController equipoController = new EquiposController(equipo, equipoModel, winEquiposA, winEquiposB);
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Cliente;
 import javaBeans.Equipo;
+import javaBeans.Mantenimiento;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ClienteModel;
@@ -31,26 +32,31 @@ import view.FrmNuevoEquipoView;
 
 /**
  *
- * @author Arthur
+ * @author Daniel-san
  */
-public class ClienteController implements WindowListener, ActionListener, KeyListener, MouseListener, FocusListener {
+public class EquiposController implements ActionListener, KeyListener, WindowListener, MouseListener, FocusListener {
 
-    //Atributos
-    private Cliente cliente;
-    private ClienteModel clienteModel;
-    private FrmClientesView frmA;
-    private FrmNuevoClienteView frmB;
+    private Equipo equipo;
+
+    private EquipoModel equiModel;
+    private FrmEquiposView frmA;
+    private FrmNuevoEquipoView frmB;
+
     private DefaultTableModel modelo;
     private int opcion;
 
-    //Constructor
-    public ClienteController(Cliente cliente, ClienteModel clienteModel, FrmClientesView frmA, FrmNuevoClienteView frmB) {
-        this.cliente = cliente;
-        this.clienteModel = clienteModel;
+    // datos de cliente
+    Cliente cliente = new Cliente();
+    ClienteModel clienteModel = new ClienteModel();
+    FrmClientesView frmClientesA = new FrmClientesView(null, true);
+    FrmNuevoClienteView frmClientesB = new FrmNuevoClienteView(null, true);
+
+    public EquiposController(Equipo equipo, EquipoModel equiModel, FrmEquiposView frmA, FrmNuevoEquipoView frmB) {
+        this.equipo = equipo;
+        this.equiModel = equiModel;
         this.frmA = frmA;
         this.frmB = frmB;
 
-        //Componentes del FrameA
         this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);
         this.frmA.lblTexto.setVisible(false);
@@ -64,23 +70,26 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         this.frmA.btnEliminar.addActionListener(this);
         this.frmA.txtBuscar.addKeyListener(this);
         this.frmA.txtBuscar.addFocusListener(this);
-       // this.frmA.tblTabla.addMouseListener(this);
 
         //Componentes del FrameB
         this.frmB.setLocationRelativeTo(null);
         this.frmB.btnGuardar.addActionListener(this);
         this.frmB.btnLimpiar.addActionListener(this);
         this.frmB.btnCancelar.addActionListener(this);
+        this.frmB.btnBuscarCliente.addActionListener(this);
+
     }
 
     //Metodos
     public void limpiarFrmB() {
-        frmB.txtCorreo.setText(null);
-        frmB.txtDireccion.setText(null);
+        frmB.txtIdEquipo.setText(null);
         frmB.txtIdCliente.setText(null);
-        frmB.txtNombre.setText(null);
-        frmB.txtTelefono.setText(null);
-        frmB.txtNombre.requestFocus();
+        frmB.txtDescripcion.setText(null);
+        frmB.txtIdEquipo.requestFocus();
+        frmB.txtMarca.setText(null);
+        frmB.txtNombreCliente.setText(null);
+        frmB.txtNombreCliente.setText(null);
+
     }
 
     @Override
@@ -101,7 +110,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void windowActivated(WindowEvent e) {
-        String columnas[] = {"ID", "Nombre", "Teléfono", "Dirección", "Correo"};
+        String columnas[] = {"ID Equipos", "Descripcción", "Marca", "ID Cliente", "Nombre cliente"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -112,15 +121,14 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
         frmA.txtBuscar.setText("Filtrar por ID o Nombre");
         frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmA.tblTabla.requestFocus();
-        ResultSet rs = clienteModel.mostrarCliente();
+        ResultSet rs = equiModel.mostrarEquipo();
 
         try {
 
             if (rs.isFirst()) {
                 do {
-                    cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                    Object newRow[] = {cliente.getIdCliente(), cliente.getNombreCliente(), cliente.getNumeroTelefono(),
-                        cliente.getDireccion(), cliente.getEmail()};
+                    equipo = new Equipo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                    Object newRow[] = {equipo.getIdEquipo(), equipo.getDescripcion(), equipo.getMarca(), equipo.getIdCliente(), equipo.getNombreCliente()};
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -134,7 +142,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void keyReleased(KeyEvent e) {
-        String columnas[] = {"ID", "Nombre", "Teléfono", "Dirección", "Correo"};
+        String columnas[] = {"ID Equipos", "Descripcción", "Marca", "ID Cliente", "Nombre cliente"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -142,15 +150,15 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
             }
         };
 
-        ResultSet rs = clienteModel.filtrarCliente(frmA.txtBuscar.getText().trim());
+        ResultSet rs = equiModel.filtrarEquipo(frmA.txtBuscar.getText().trim());
 
         try {
 
             if (rs.isFirst()) {
                 do {
-                    cliente = new Cliente(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-                    Object newRow[] = {cliente.getIdCliente(), cliente.getNombreCliente(), cliente.getNumeroTelefono(),
-                        cliente.getDireccion(), cliente.getEmail()};
+                    equipo = new Equipo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
+                    Object newRow[] = {equipo.getIdEquipo(), equipo.getDescripcion(), equipo.getMarca(), equipo.getIdCliente()};
+                    modelo.addRow(newRow);
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -164,14 +172,16 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         if (frmA.isActive()) { //Botones del FrameA
             switch (e.getActionCommand()) {
 
                 case "Nuevo":
                     opcion = 1;
-                    frmB.setTitle("Registro de Cliente");
+                    frmB.setTitle("Registro de equipo");
                     limpiarFrmB();
+                    frmB.txtIdEquipo.setEnabled(true);
+                    frmB.txtIdCliente.setEnabled(true);
+                    frmB.setEnabled(true);
                     frmB.setVisible(true);
                     break;
 
@@ -179,15 +189,15 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     if (frmA.tblTabla.getSelectedRowCount() == 1) {
 
                         opcion = 2;
-                        frmB.setTitle("Actualización de Cliente");
+                        frmB.setTitle("Actualización de Equipo");
                         int fila = frmA.tblTabla.getSelectedRow();
 
-                        frmB.txtIdCliente.setEnabled(false);
-                        frmB.txtIdCliente.setText(frmA.tblTabla.getValueAt(fila, 0).toString());
-                        frmB.txtNombre.setText(frmA.tblTabla.getValueAt(fila, 1).toString());
-                        frmB.txtTelefono.setText(frmA.tblTabla.getValueAt(fila, 2).toString());
-                        frmB.txtDireccion.setText(frmA.tblTabla.getValueAt(fila, 3).toString());
-                        frmB.txtCorreo.setText(frmA.tblTabla.getValueAt(fila, 4).toString());
+                        frmB.txtIdEquipo.setEnabled(false);
+                        frmB.txtIdEquipo.setText(frmA.tblTabla.getValueAt(fila, 0).toString());
+                        frmB.txtDescripcion.setText(frmA.tblTabla.getValueAt(fila, 1).toString());
+                        frmB.txtMarca.setText(frmA.tblTabla.getValueAt(fila, 2).toString());
+                        frmB.txtIdCliente.setText(frmA.tblTabla.getValueAt(fila, 3).toString());
+                        frmB.txtNombreCliente.setText(frmA.tblTabla.getValueAt(fila, 4).toString());
 
                         frmB.setVisible(true);
 
@@ -200,12 +210,12 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     if (frmA.tblTabla.getSelectedRowCount() == 1) {
 
                         int fila = frmA.tblTabla.getSelectedRow();
-                        cliente.setIdCliente(Integer.parseInt(frmA.tblTabla.getValueAt(fila, 0).toString()));
-                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el cliente " + cliente.getIdCliente() + "?", "Seleccionar una Opción", 0);
+                        equipo.setIdEquipo(Integer.parseInt(frmA.tblTabla.getValueAt(fila, 0).toString()));
+                        int resp = JOptionPane.showConfirmDialog(frmA, "¿Desea eliminar el equipo " + equipo.getIdEquipo() + "?", "Seleccionar una Opción", 0);
 
                         if (resp == 0) {
-                            if (clienteModel.eliminarCliente(cliente.getIdCliente())) {
-                                JOptionPane.showMessageDialog(frmA, "Cliente eliminado");
+                            if (equiModel.eliminarEquipo(equipo.getIdEquipo())) {
+                                JOptionPane.showMessageDialog(frmA, "Equipo eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }
@@ -224,25 +234,26 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
                 case "Guardar":
                     try {
-                    cliente.setIdCliente(Integer.parseInt(frmB.txtIdCliente.getText()));
-                    cliente.setNombreCliente(frmB.txtNombre.getText().trim());
-                    cliente.setNumeroTelefono(Integer.parseInt(frmB.txtTelefono.getText().trim()));
-                    cliente.setDireccion(frmB.txtDireccion.getText().trim());
-                    cliente.setEmail(frmB.txtCorreo.getText().trim());
+                    equipo.setIdEquipo(Integer.parseInt(frmB.txtIdEquipo.getText().trim()));
+                    equipo.setDescripcion(frmB.txtDescripcion.getText().trim());
+                    equipo.setMarca(frmB.txtMarca.getText().trim());
+                    equipo.setIdCliente(Integer.parseInt(frmB.txtIdCliente.getText().trim()));
+                    equipo.setNombreCliente(frmB.txtNombreCliente.getText().trim());
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
                 }
 
                 if (opcion == 1) {
-                    if (clienteModel.insertarCliente(cliente)) {
-                        JOptionPane.showMessageDialog(frmB, "Cliente Registrado");
+                    if (equiModel.insertarEquipo(equipo)) {
+                        JOptionPane.showMessageDialog(frmB, "Equipo Registrado");
                         frmB.dispose();
                     } else {
                         JOptionPane.showMessageDialog(frmB, "Error al guardar");
                     }
                 } else {
-                    if (clienteModel.modificarCliente(cliente)) {
-                        JOptionPane.showMessageDialog(frmB, "Cliente Actualizado");
+                    if (equiModel.modificarEquipo(equipo)) {
+                        JOptionPane.showMessageDialog(frmB, "Equipos Actualizado");
                         frmB.dispose();
                     } else {
                         JOptionPane.showMessageDialog(frmB, "Error al editar");
@@ -257,6 +268,18 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                 case "Cancelar":
                     frmB.dispose();
                     break;
+
+                case "...":
+                   ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
+
+                    frmClientesA.lblInfo.setVisible(true);
+                    frmClientesA.btnNuevo.setVisible(true);
+                    frmClientesA.btnEditar.setVisible(false);
+                    frmClientesA.btnEliminar.setVisible(false);
+                    frmClientesA.tblTabla.addMouseListener(this);
+
+                    frmClientesA.setLocationRelativeTo(null);
+                    frmClientesA.setVisible(true);
 
             }
         }
@@ -297,6 +320,16 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+        if (e.getSource() == frmClientesA.tblTabla && e.getClickCount() == 2) {
+
+            int fila = frmClientesA.tblTabla.getSelectedRow();
+            frmB.txtIdCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
+            frmB.txtNombreCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
+            frmClientesA.dispose();
+
+        }
+
     }
 
     @Override
