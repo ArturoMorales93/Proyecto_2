@@ -19,19 +19,23 @@ import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Cliente;
+import javaBeans.DetalleOrden;
 import javaBeans.Empleado;
 import javaBeans.Equipo;
 import javaBeans.OrdenTrabajo;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ClienteModel;
+import model.DetalleOrdenModel;
 import model.EmpleadoModel;
 import model.EquipoModel;
 import model.OrdenTrabajoModel;
 import view.FrmClientesView;
+import view.FrmDetalleOrdenView;
 import view.FrmEmpleadosView;
 import view.FrmEquiposView;
 import view.FrmNuevoClienteView;
+import view.FrmNuevoDetalleOrdenView;
 import view.FrmNuevoEmpleadoView;
 import view.FrmNuevoEquipoView;
 import view.FrmOrdenTrabajoView;
@@ -46,8 +50,8 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     //Atributos
     private OrdenTrabajo ordenTrabajo;
     private OrdenTrabajoModel ordenTrabajoModel;
-    private FrmOrdenTrabajoView frmOrdenA;
-    private FrmNuevoOrdenTrabajoView frmOrdenB;
+    private FrmOrdenTrabajoView frmOrdenTrabajoA;
+    private FrmNuevoOrdenTrabajoView frmOrdenTrabajoB;
 
     private DefaultTableModel modelo;
     private int opcion;
@@ -56,78 +60,85 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     Equipo equipo = new Equipo();
     Cliente cliente = new Cliente();
     Empleado empleado = new Empleado();
+    DetalleOrden detalleOrden = new DetalleOrden();
 
     //Models
     EquipoModel equipoModel = new EquipoModel();
     ClienteModel clienteModel = new ClienteModel();
     EmpleadoModel empleadoModel = new EmpleadoModel();
+    DetalleOrdenModel detalleOrdenModel = new DetalleOrdenModel();
 
     //Frames A
     FrmEquiposView frmEquiposA = new FrmEquiposView(null, true);
     FrmClientesView frmClientesA = new FrmClientesView(null, true);
     FrmEmpleadosView frmEmpleadosA = new FrmEmpleadosView(null, true);
+    FrmDetalleOrdenView frmDetalleOrdenA = new FrmDetalleOrdenView(null, true);
 
     //Frames B
     FrmNuevoEquipoView frmEquiposB = new FrmNuevoEquipoView(null, true);
     FrmNuevoClienteView frmClientesB = new FrmNuevoClienteView(null, true);
     FrmNuevoEmpleadoView frmEmpleadosB = new FrmNuevoEmpleadoView(null, true);
+    FrmNuevoDetalleOrdenView frmDetalleOrdenB = new FrmNuevoDetalleOrdenView(null, true);
+
+    //Controllers
+    ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
 
     //Constructor
-    public OrdenTrabajoController(OrdenTrabajo ordenTrabajo, OrdenTrabajoModel ordenTrabajoModel, FrmOrdenTrabajoView frmOrdenA, FrmNuevoOrdenTrabajoView frmOrdenB) {
+    public OrdenTrabajoController(OrdenTrabajo ordenTrabajo, OrdenTrabajoModel ordenTrabajoModel, FrmOrdenTrabajoView frmOrdenTrabajoA, FrmNuevoOrdenTrabajoView frmOrdenTrabajoB) {
         this.ordenTrabajo = ordenTrabajo;
         this.ordenTrabajoModel = ordenTrabajoModel;
-        this.frmOrdenA = frmOrdenA;
-        this.frmOrdenB = frmOrdenB;
+        this.frmOrdenTrabajoA = frmOrdenTrabajoA;
+        this.frmOrdenTrabajoB = frmOrdenTrabajoB;
 
         //Componentes del FrameA
-        this.frmOrdenA.setLocationRelativeTo(null);
-        this.frmOrdenA.addWindowListener(this);
-        this.frmOrdenA.lblInfo.addMouseListener(this);
-        this.frmOrdenA.lblTexto.setVisible(false);
-        this.frmOrdenA.tblTabla.requestFocus();
-        this.frmOrdenA.tblTabla.getTableHeader().setResizingAllowed(false);
-        this.frmOrdenA.tblTabla.getTableHeader().setReorderingAllowed(false);
-        this.frmOrdenA.btnNuevo.addActionListener(this);
-        this.frmOrdenA.btnEditar.addActionListener(this);
-        this.frmOrdenA.btnEliminar.addActionListener(this);
-        this.frmOrdenA.txtBuscar.addKeyListener(this);
-        this.frmOrdenA.txtBuscar.addFocusListener(this);
+        this.frmOrdenTrabajoA.setLocationRelativeTo(null);
+        this.frmOrdenTrabajoA.addWindowListener(this);
+        this.frmOrdenTrabajoA.lblInfo.addMouseListener(this);
+        this.frmOrdenTrabajoA.lblTexto.setVisible(false);
+        this.frmOrdenTrabajoA.tblTabla.requestFocus();
+        this.frmOrdenTrabajoA.tblTabla.getTableHeader().setResizingAllowed(false);
+        this.frmOrdenTrabajoA.tblTabla.getTableHeader().setReorderingAllowed(false);
+        this.frmOrdenTrabajoA.btnNuevo.addActionListener(this);
+        this.frmOrdenTrabajoA.btnEditar.addActionListener(this);
+        this.frmOrdenTrabajoA.btnEliminar.addActionListener(this);
+        this.frmOrdenTrabajoA.txtBuscar.addKeyListener(this);
+        this.frmOrdenTrabajoA.txtBuscar.addFocusListener(this);
 
         //Componentes del FrameB
-        this.frmOrdenB.setLocationRelativeTo(null);
-        this.frmOrdenB.btnGuardar.addActionListener(this);
-        this.frmOrdenB.btnLimpiar.addActionListener(this);
-        this.frmOrdenB.btnCancelar.addActionListener(this);
-        this.frmOrdenB.btnBuscarCliente.addActionListener(this);
-        this.frmOrdenB.btnBuscarEmpleado.addActionListener(this);
-        this.frmOrdenB.btnBuscarEquipo.addActionListener(this);
+        this.frmOrdenTrabajoB.setLocationRelativeTo(null);
+        this.frmOrdenTrabajoB.btnGuardar.addActionListener(this);
+        this.frmOrdenTrabajoB.btnLimpiar.addActionListener(this);
+        this.frmOrdenTrabajoB.btnCancelar.addActionListener(this);
+        this.frmOrdenTrabajoB.btnBuscarCliente.addActionListener(this);
+        this.frmOrdenTrabajoB.btnBuscarEmpleado.addActionListener(this);
+        this.frmOrdenTrabajoB.btnBuscarEquipo.addActionListener(this);
     }
 
     //Metodos
     public void limpiarFrmB() {
-        frmOrdenB.txtCliente.setText(null);
-        frmOrdenB.txtNombreCliente.setText(null);
-        frmOrdenB.txtEmpleado.setText(null);
-        frmOrdenB.txtNombreEmpleado.setText(null);
-        frmOrdenB.txtEquipo.setText(null);
-        frmOrdenB.txtMarca.setText(null);
-        frmOrdenB.txtTotal.setText(null);
-        frmOrdenB.btnBuscarCliente.requestFocus();
+        frmOrdenTrabajoB.txtCliente.setText(null);
+        frmOrdenTrabajoB.txtNombreCliente.setText(null);
+        frmOrdenTrabajoB.txtEmpleado.setText(null);
+        frmOrdenTrabajoB.txtNombreEmpleado.setText(null);
+        frmOrdenTrabajoB.txtEquipo.setText(null);
+        frmOrdenTrabajoB.txtMarca.setText(null);
+        frmOrdenTrabajoB.txtTotal.setText(null);
+        frmOrdenTrabajoB.btnBuscarCliente.requestFocus();
     }
 
     @Override
     public void focusGained(FocusEvent e) {
-        if (frmOrdenA.txtBuscar.getText().equals("Filtrar por OC o ID Empleado")) {
-            frmOrdenA.txtBuscar.setText(null);
-            frmOrdenA.txtBuscar.setForeground(Color.BLACK);
+        if (frmOrdenTrabajoA.txtBuscar.getText().equals("Filtrar por OC o ID Empleado")) {
+            frmOrdenTrabajoA.txtBuscar.setText(null);
+            frmOrdenTrabajoA.txtBuscar.setForeground(Color.BLACK);
         }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if (frmOrdenA.txtBuscar.getText().equals("")) {
-            frmOrdenA.txtBuscar.setText("Filtrar por OC o ID Empleado");
-            frmOrdenA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        if (frmOrdenTrabajoA.txtBuscar.getText().equals("")) {
+            frmOrdenTrabajoA.txtBuscar.setText("Filtrar por OC o ID Empleado");
+            frmOrdenTrabajoA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         }
     }
 
@@ -141,9 +152,9 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
             }
         };
 
-        frmOrdenA.txtBuscar.setText("Filtrar por OC o ID Empleado");
-        frmOrdenA.txtBuscar.setForeground(Color.LIGHT_GRAY);
-        frmOrdenA.tblTabla.requestFocus();
+        frmOrdenTrabajoA.txtBuscar.setText("Filtrar por OC o ID Empleado");
+        frmOrdenTrabajoA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        frmOrdenTrabajoA.tblTabla.requestFocus();
         ResultSet rs = ordenTrabajoModel.mostrarOrdenTrabajo();
 
         try {
@@ -156,11 +167,11 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
-            frmOrdenA.tblTabla.setModel(modelo);
-            frmOrdenA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
+            frmOrdenTrabajoA.tblTabla.setModel(modelo);
+            frmOrdenTrabajoA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(frmOrdenA, ex.getMessage());
+            JOptionPane.showMessageDialog(frmOrdenTrabajoA, ex.getMessage());
         }
     }
 
@@ -174,7 +185,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
             }
         };
 
-        ResultSet rs = ordenTrabajoModel.filtrarOrdenTrabajo(frmOrdenA.txtBuscar.getText().trim());
+        ResultSet rs = ordenTrabajoModel.filtrarOrdenTrabajo(frmOrdenTrabajoA.txtBuscar.getText().trim());
 
         try {
 
@@ -186,96 +197,96 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
-            frmOrdenA.tblTabla.setModel(modelo);
-            frmOrdenA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
+            frmOrdenTrabajoA.tblTabla.setModel(modelo);
+            frmOrdenTrabajoA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(frmOrdenA, ex.getMessage());
+            JOptionPane.showMessageDialog(frmOrdenTrabajoA, ex.getMessage());
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (frmOrdenA.isActive()) { //Botones del frmOrdenA
+        if (frmOrdenTrabajoA.isActive()) { //Botones del frmOrdenTrabajoA
             switch (e.getActionCommand()) {
 
                 case "Nuevo":
                     opcion = 1;
-                    frmOrdenB.setTitle("Registro de OrdenTrabajo");
+                    frmOrdenTrabajoB.setTitle("Registro de OrdenTrabajo");
                     limpiarFrmB();
-                    frmOrdenB.setVisible(true);
+                    frmOrdenTrabajoB.setVisible(true);
                     break;
 
                 case "Editar":
-                    if (frmOrdenA.tblTabla.getSelectedRowCount() == 1) {
+                    if (frmOrdenTrabajoA.tblTabla.getSelectedRowCount() == 1) {
 
                         opcion = 2;
-                        frmOrdenB.setTitle("Actualización de OrdenTrabajo");
-                        int fila = frmOrdenA.tblTabla.getSelectedRow();
-                        ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenA.tblTabla.getValueAt(fila, 0).toString()));
+                        frmOrdenTrabajoB.setTitle("Actualización de OrdenTrabajo");
+                        int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
+                        ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString()));
 
-                        frmOrdenB.txtCliente.setText(frmOrdenA.tblTabla.getValueAt(fila, 0).toString());
-                        frmOrdenB.txtEmpleado.setText(frmOrdenA.tblTabla.getValueAt(fila, 1).toString());
-                        frmOrdenB.txtEquipo.setText(frmOrdenA.tblTabla.getValueAt(fila, 2).toString());
-                        frmOrdenB.txtTotal.setText(frmOrdenA.tblTabla.getValueAt(fila, 3).toString());
+                        frmOrdenTrabajoB.txtCliente.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 1).toString());
+                        frmOrdenTrabajoB.txtEmpleado.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 2).toString());
+                        frmOrdenTrabajoB.txtEquipo.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 3).toString());
+                        frmOrdenTrabajoB.txtTotal.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 4).toString());
 
-                        frmOrdenB.setVisible(true);
+                        frmOrdenTrabajoB.setVisible(true);
 
                     } else {
-                        JOptionPane.showMessageDialog(frmOrdenA, "Debe seleccionar un registro");
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoA, "Debe seleccionar un registro");
                     }
                     break;
 
                 case "Eliminar":
-                    if (frmOrdenA.tblTabla.getSelectedRowCount() == 1) {
+                    if (frmOrdenTrabajoA.tblTabla.getSelectedRowCount() == 1) {
 
-                        int fila = frmOrdenA.tblTabla.getSelectedRow();
-                        ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenA.tblTabla.getValueAt(fila, 0).toString()));
-                        int resp = JOptionPane.showConfirmDialog(frmOrdenA, "¿Desea eliminar el ordenTrabajo " + ordenTrabajo.getIdOrdenTrabajo() + "?", "Seleccionar una Opción", 0);
+                        int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
+                        ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString()));
+                        int resp = JOptionPane.showConfirmDialog(frmOrdenTrabajoA, "¿Desea eliminar el ordenTrabajo " + ordenTrabajo.getIdOrdenTrabajo() + "?", "Seleccionar una Opción", 0);
 
                         if (resp == 0) {
                             if (ordenTrabajoModel.eliminarOrdenTrabajo(ordenTrabajo.getIdOrdenTrabajo())) {
-                                JOptionPane.showMessageDialog(frmOrdenA, "OrdenTrabajo eliminado");
+                                JOptionPane.showMessageDialog(frmOrdenTrabajoA, "OrdenTrabajo eliminado");
                             } else {
-                                JOptionPane.showMessageDialog(frmOrdenA, "Error al eliminar");
+                                JOptionPane.showMessageDialog(frmOrdenTrabajoA, "Error al eliminar");
                             }
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(frmOrdenA, "Debe seleccionar un registro");
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoA, "Debe seleccionar un registro");
                     }
                     break;
 
             }
         }
 
-        if (frmOrdenB.isActive()) { //Botones del frmOrdenB
+        if (frmOrdenTrabajoB.isActive()) { //Botones del frmOrdenTrabajoB
             switch (e.getActionCommand()) {
 
                 case "Guardar":
                     try {
-                    ordenTrabajo.setIdCliente(Integer.parseInt(frmOrdenB.txtCliente.getText().trim()));
-                    ordenTrabajo.setIdEmpleado(Integer.parseInt(frmOrdenB.txtEmpleado.getText().trim()));
-                    ordenTrabajo.setIdEquipo(Integer.parseInt(frmOrdenB.txtEquipo.getText().trim()));
-                    ordenTrabajo.setTotal(Integer.parseInt(frmOrdenB.txtTotal.getText().trim()));
+                    ordenTrabajo.setIdCliente(Integer.parseInt(frmOrdenTrabajoB.txtCliente.getText().trim()));
+                    ordenTrabajo.setIdEmpleado(Integer.parseInt(frmOrdenTrabajoB.txtEmpleado.getText().trim()));
+                    ordenTrabajo.setIdEquipo(Integer.parseInt(frmOrdenTrabajoB.txtEquipo.getText().trim()));
+                    ordenTrabajo.setTotal(Integer.parseInt(frmOrdenTrabajoB.txtTotal.getText().trim()));
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frmOrdenB, "Error de tipo de datos");
+                    JOptionPane.showMessageDialog(frmOrdenTrabajoB, "Error de tipo de datos");
                 }
 
                 if (opcion == 1) {
                     if (ordenTrabajoModel.insertarOrdenTrabajo(ordenTrabajo)) {
-                        JOptionPane.showMessageDialog(frmOrdenB, "OrdenTrabajo Registrado");
-                        frmOrdenB.dispose();
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoB, "OrdenTrabajo Registrado");
+                        frmOrdenTrabajoB.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(frmOrdenB, "Error al guardar");
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoB, "Error al guardar");
                     }
                 } else {
                     if (ordenTrabajoModel.modificarOrdenTrabajo(ordenTrabajo)) {
-                        JOptionPane.showMessageDialog(frmOrdenB, "OrdenTrabajo Actualizado");
-                        frmOrdenB.dispose();
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoB, "OrdenTrabajo Actualizado");
+                        frmOrdenTrabajoB.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(frmOrdenB, "Error al editar");
+                        JOptionPane.showMessageDialog(frmOrdenTrabajoB, "Error al editar");
                     }
                 }
                 break;
@@ -285,31 +296,49 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                     break;
 
                 case "Cancelar":
-                    frmOrdenB.dispose();
+                    frmOrdenTrabajoB.dispose();
                     break;
 
             }
 
-            if (e.getSource() == frmOrdenB.btnBuscarCliente) {
-                ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
-
+            if (e.getSource() == frmOrdenTrabajoB.btnBuscarCliente) {
                 frmClientesA.lblInfo.setVisible(true);
                 frmClientesA.btnNuevo.setVisible(false);
                 frmClientesA.btnEditar.setVisible(false);
                 frmClientesA.btnEliminar.setVisible(false);
                 frmClientesA.tblTabla.addMouseListener(this);
 
-                frmClientesA.setLocationRelativeTo(frmOrdenB.btnBuscarEquipo);
+                frmClientesA.setLocationRelativeTo(frmOrdenTrabajoB.btnBuscarEquipo);
                 frmClientesA.setVisible(true);
             }
-            if (e.getSource() == frmOrdenB.btnBuscarEmpleado) {
+            if (e.getSource() == frmOrdenTrabajoB.btnBuscarEmpleado) {
 
             }
-            if (e.getSource() == frmOrdenB.btnBuscarEquipo) {
+            if (e.getSource() == frmOrdenTrabajoB.btnBuscarEquipo) {
 
             }
         }
 
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2) {
+
+            if (e.getSource() == frmOrdenTrabajoA.tblTabla) {
+                frmDetalleOrdenA.setVisible(true);
+            }
+            
+            if (e.getSource() == frmClientesA.tblTabla) {
+
+                int fila = frmClientesA.tblTabla.getSelectedRow();
+                frmOrdenTrabajoB.txtCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
+                frmOrdenTrabajoB.txtNombreCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
+                frmClientesA.dispose();
+
+            }
+
+        }
     }
 
     @Override
@@ -345,22 +374,6 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 2) {
-
-            if (e.getSource() == frmClientesA.tblTabla) {
-
-                int fila = frmClientesA.tblTabla.getSelectedRow();
-                frmOrdenB.txtCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
-                frmOrdenB.txtNombreCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
-                frmClientesA.dispose();
-
-            }
-
-        }
-    }
-
-    @Override
     public void mousePressed(MouseEvent e) {
     }
 
@@ -370,12 +383,12 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        frmOrdenA.lblTexto.setVisible(true);
+        frmOrdenTrabajoA.lblTexto.setVisible(true);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        frmOrdenA.lblTexto.setVisible(false);
+        frmOrdenTrabajoA.lblTexto.setVisible(false);
     }
 
 }
