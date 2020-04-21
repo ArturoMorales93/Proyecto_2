@@ -22,16 +22,18 @@ public class MantenimientoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarMantenimiento(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarMantenimiento(?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setString(1, mantenimiento.getIdMantenimiento());
+            cst.setString(2, mantenimiento.getDescripcion());
+            cst.setInt(3, mantenimiento.getPrecio());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(4, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(4);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +48,18 @@ public class MantenimientoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarMantenimiento(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarMantenimiento(?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setString(1, mantenimiento.getIdMantenimiento());
+            cst.setString(2, mantenimiento.getDescripcion());
+            cst.setInt(3, mantenimiento.getPrecio());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(4, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(4);
 
         } catch (SQLException e) {
             return false;
@@ -64,7 +68,7 @@ public class MantenimientoModel {
         }
     }
 
-    public boolean eliminarMantenimiento(int idMantenimiento) {
+    public boolean eliminarMantenimiento(String idMantenimiento) {
 
         DataBase db = new DataBase();
 
@@ -72,7 +76,7 @@ public class MantenimientoModel {
             db.conectar();
             CallableStatement cst = db.getConexion().prepareCall("call pa_eliminarMantenimiento(?,?)");
             //Parametros de entrada del procedimiento almacenado
-            cst.setInt(1, idMantenimiento);
+            cst.setString(1, idMantenimiento);
 
             //Parametro de salida del procedimiento almacenado
             cst.registerOutParameter(2, java.sql.Types.BOOLEAN);
@@ -94,18 +98,18 @@ public class MantenimientoModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from mantenimiento");
+        db.ejecutarSqlSelect("Select * from mantenimiento order by idMantenimiento");
         rs = db.obtenerRegistro();
 
         return rs;
     }
-    
+
     public ResultSet filtrarMantenimiento(String texto) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from mantenimiento where idMantenimiento like '%" + texto + "%' or descripcion like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from mantenimiento where idMantenimiento like '%" + texto + "%' or descripccion like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

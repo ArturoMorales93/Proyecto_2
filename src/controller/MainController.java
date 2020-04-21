@@ -92,9 +92,11 @@ public class MainController implements ActionListener {
         FrmNuevoMantenimientoView winMantenimientoB = new FrmNuevoMantenimientoView(winTiendaElectronica, true);
 
         //Controllers
+        EquiposController equipoController = new EquiposController(equipo, equipoModel, winEquiposA, winEquiposB);
         ClienteController clienteController = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
         FacturaController facturaController = new FacturaController(factura, facturaModel, winFacturacionA, winFacturacionB);
         OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
+        MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, winMantenimientoA, winMantenimientoB);
     }
 
     //Metodos

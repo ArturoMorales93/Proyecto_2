@@ -163,7 +163,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
             if (rs.isFirst()) {
                 do {
-                    ordenTrabajo = new OrdenTrabajo(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                    ordenTrabajo = new OrdenTrabajo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
                     Object newRow[] = {ordenTrabajo.getIdOrdenTrabajo(), ordenTrabajo.getIdCliente(), ordenTrabajo.getIdEmpleado(),
                         ordenTrabajo.getIdEquipo(), ordenTrabajo.getTotal()};
                     modelo.addRow(newRow);
@@ -193,7 +193,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
             if (rs.isFirst()) {
                 do {
-                    ordenTrabajo = new OrdenTrabajo(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                    ordenTrabajo = new OrdenTrabajo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getInt(5));
                     Object newRow[] = {ordenTrabajo.getIdOrdenTrabajo(), ordenTrabajo.getIdCliente(), ordenTrabajo.getIdEmpleado(),
                         ordenTrabajo.getIdEquipo(), ordenTrabajo.getTotal()};
                     modelo.addRow(newRow);
@@ -269,7 +269,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                 case "Guardar":
                     try {
                     ordenTrabajo.setIdCliente(Integer.parseInt(frmOrdenTrabajoB.txtCliente.getText().trim()));
-                    ordenTrabajo.setIdEmpleado(Integer.parseInt(frmOrdenTrabajoB.txtEmpleado.getText().trim()));
+                    ordenTrabajo.setIdEmpleado(frmOrdenTrabajoB.txtEmpleado.getText().trim());
                     ordenTrabajo.setIdEquipo(Integer.parseInt(frmOrdenTrabajoB.txtEquipo.getText().trim()));
                     ordenTrabajo.setTotal(Integer.parseInt(frmOrdenTrabajoB.txtTotal.getText().trim()));
                 } catch (NumberFormatException ex) {

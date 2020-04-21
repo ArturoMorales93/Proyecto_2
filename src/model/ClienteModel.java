@@ -22,16 +22,20 @@ public class ClienteModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarCliente(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarCliente(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, cliente.getIdCliente());
+            cst.setString(2, cliente.getNombreCliente());
+            cst.setInt(3, cliente.getNumeroTelefono());
+            cst.setString(4, cliente.getDireccion());
+            cst.setString(5, cliente.getEmail());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +50,20 @@ public class ClienteModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarCliente(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarCliente(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, cliente.getIdCliente());
+            cst.setString(2, cliente.getNombreCliente());
+            cst.setInt(3, cliente.getNumeroTelefono());
+            cst.setString(4, cliente.getDireccion());
+            cst.setString(5, cliente.getEmail());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -99,7 +107,7 @@ public class ClienteModel {
 
         return rs;
     }
-    
+
     public ResultSet filtrarCliente(String texto) {
 
         DataBase db = new DataBase();

@@ -5,8 +5,6 @@
  */
 package view;
 
-import com.sun.glass.ui.Cursor;
-
 /**
  *
  * @author Arthur

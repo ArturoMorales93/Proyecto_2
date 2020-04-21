@@ -22,16 +22,20 @@ public class EquipoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarEquipo(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarEquipos(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, equipo.getIdEquipo());
+            cst.setString(2, equipo.getDescripcion());
+            cst.setString(3, equipo.getMarca());
+            cst.setInt(4, equipo.getIdCliente());
+            cst.setString(5, equipo.getNombreCliente());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +50,20 @@ public class EquipoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarEquipo(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarEquipos(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, equipo.getIdEquipo());
+            cst.setString(2, equipo.getDescripcion());
+            cst.setString(3, equipo.getMarca());
+            cst.setInt(4, equipo.getIdCliente());
+            cst.setString(5, equipo.getNombreCliente());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -70,7 +78,7 @@ public class EquipoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_eliminarEquipo(?,?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_eliminarEquipos(?,?)");
             //Parametros de entrada del procedimiento almacenado
             cst.setInt(1, idEquipo);
 
@@ -94,12 +102,12 @@ public class EquipoModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from equipo");
+        db.ejecutarSqlSelect("Select * from equipos");
         rs = db.obtenerRegistro();
 
         return rs;
     }
-    
+
     public ResultSet filtrarEquipo(String texto) {
 
         DataBase db = new DataBase();
