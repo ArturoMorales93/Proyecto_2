@@ -20,16 +20,28 @@ import view.FrmTiendaElectronica;
  */
 public class ClaseMain {
 
-    //Atributos
-    private static final FrmTiendaElectronica winTiendaElectronica = new FrmTiendaElectronica();
-    private static final FrmEquiposView winEquiposView = new FrmEquiposView(winTiendaElectronica, true);
-    private static final FrmClientesView winClientesView = new FrmClientesView(winTiendaElectronica, true);
-    private static final FrmEmpleadosView winEmpleadosView = new FrmEmpleadosView(winTiendaElectronica, true);
-    private static final FrmFacturacionView winFacturacionView = new FrmFacturacionView(winTiendaElectronica, true);
-    private static final FrmOrdenTrabajoView winOrdenTrabajoView = new FrmOrdenTrabajoView(winTiendaElectronica, true);
-    private static final FrmMantenimientoView winMantenimientoView = new FrmMantenimientoView(winTiendaElectronica, true);
-
     public static void main(String[] args) {
+
+        //Codigo por defecto para settear el Look and Feel
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FrmTiendaElectronica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        FrmTiendaElectronica winTiendaElectronica = new FrmTiendaElectronica();
+        FrmEquiposView winEquiposView = new FrmEquiposView(winTiendaElectronica, true);
+        FrmClientesView winClientesView = new FrmClientesView(winTiendaElectronica, true);
+        FrmEmpleadosView winEmpleadosView = new FrmEmpleadosView(winTiendaElectronica, true);
+        FrmFacturacionView winFacturacionView = new FrmFacturacionView(winTiendaElectronica, true);
+        FrmOrdenTrabajoView winOrdenTrabajoView = new FrmOrdenTrabajoView(winTiendaElectronica, true);
+        FrmMantenimientoView winMantenimientoView = new FrmMantenimientoView(winTiendaElectronica, true);
+
         MainController mainController = new MainController(winTiendaElectronica, winEquiposView, winClientesView, winEmpleadosView, winFacturacionView, winOrdenTrabajoView, winMantenimientoView);
         mainController.iniciarVista();
     }
