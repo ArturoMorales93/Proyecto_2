@@ -23,7 +23,7 @@ public class DataBase {
     //Atributos
     private final String base = "tiendaelectronica_db";
     private final String user = "root";
-    private final String password = "root";
+    private final String password = "1234";
     private final String url = "jdbc:mysql://localhost/" + base + "?useSSL=false";
 
     private Connection conexion;

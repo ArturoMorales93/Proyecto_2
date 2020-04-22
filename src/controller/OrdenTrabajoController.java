@@ -81,6 +81,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     FrmNuevoDetalleOrdenView frmDetalleOrdenB = new FrmNuevoDetalleOrdenView(null, true);
 
     //Controllers
+    EquiposController equipoController = new EquiposController(equipo, equipoModel, frmEquiposA, frmEquiposB);
     ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
     DetalleOrdenController detalleOrdenController = new DetalleOrdenController(detalleOrden, detalleOrdenModel, frmDetalleOrdenA, frmDetalleOrdenB);
 
@@ -314,10 +315,24 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                 frmClientesA.setVisible(true);
             }
             if (e.getSource() == frmOrdenTrabajoB.btnBuscarEmpleado) {
+                frmEmpleadosA.lblInfo.setVisible(true);
+                frmEmpleadosA.btnNuevo.setVisible(false);
+                frmEmpleadosA.btnEditar.setVisible(false);
+                frmEmpleadosA.btnEliminar.setVisible(false);
+                frmEmpleadosA.tblTabla.addMouseListener(this);
 
+                frmEmpleadosA.setLocationRelativeTo(frmOrdenTrabajoB.btnBuscarEquipo);
+                frmEmpleadosA.setVisible(true);
             }
             if (e.getSource() == frmOrdenTrabajoB.btnBuscarEquipo) {
+                frmEquiposA.lblInfo.setVisible(true);
+                frmEquiposA.btnNuevo.setVisible(false);
+                frmEquiposA.btnEditar.setVisible(false);
+                frmEquiposA.btnEliminar.setVisible(false);
+                frmEquiposA.tblTabla.addMouseListener(this);
 
+                frmEquiposA.setLocationRelativeTo(frmOrdenTrabajoB.btnBuscarEquipo);
+                frmEquiposA.setVisible(true);
             }
         }
 
@@ -328,16 +343,30 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
         if (e.getClickCount() == 2) {
 
             if (e.getSource() == frmOrdenTrabajoA.tblTabla) {
-                frmDetalleOrdenA.setVisible(true);
+                int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
+                frmDetalleOrdenB.txtOrden.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString());
+                frmDetalleOrdenB.setVisible(true);
             }
-            
-            if (e.getSource() == frmClientesA.tblTabla) {
 
+            if (e.getSource() == frmClientesA.tblTabla) {
                 int fila = frmClientesA.tblTabla.getSelectedRow();
                 frmOrdenTrabajoB.txtCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
                 frmOrdenTrabajoB.txtNombreCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
                 frmClientesA.dispose();
+            }
 
+            if (e.getSource() == frmEmpleadosA.tblTabla) {
+                int fila = frmEmpleadosA.tblTabla.getSelectedRow();
+                frmOrdenTrabajoB.txtEmpleado.setText(frmEmpleadosA.tblTabla.getValueAt(fila, 0).toString());
+                frmOrdenTrabajoB.txtNombreEmpleado.setText(frmEmpleadosA.tblTabla.getValueAt(fila, 1).toString());
+                frmEmpleadosA.dispose();
+            }
+
+            if (e.getSource() == frmEquiposA.tblTabla) {
+                int fila = frmEquiposA.tblTabla.getSelectedRow();
+                frmOrdenTrabajoB.txtEquipo.setText(frmEquiposA.tblTabla.getValueAt(fila, 0).toString());
+                frmOrdenTrabajoB.txtMarca.setText(frmEquiposA.tblTabla.getValueAt(fila, 2).toString());
+                frmEquiposA.dispose();
             }
 
         }

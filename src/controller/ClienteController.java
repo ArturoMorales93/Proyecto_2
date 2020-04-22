@@ -70,12 +70,16 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     //Metodos
     public void limpiarFrmB() {
+        if (opcion == 1) {
+            frmB.txtIdCliente.setText(null);
+            frmB.txtIdCliente.requestFocus();
+        } else {
+            frmB.txtNombre.requestFocus();
+        }
         frmB.txtCorreo.setText(null);
         frmB.txtDireccion.setText(null);
-        frmB.txtIdCliente.setText(null);
         frmB.txtNombre.setText(null);
         frmB.txtTelefono.setText(null);
-        frmB.txtNombre.requestFocus();
     }
 
     @Override
@@ -167,7 +171,7 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
                     opcion = 1;
                     frmB.setTitle("Registro de Cliente");
                     limpiarFrmB();
-                    
+
                     frmB.txtIdCliente.setEnabled(true);
                     frmB.txtIdCliente.requestFocus();
                     frmB.setVisible(true);

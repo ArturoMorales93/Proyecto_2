@@ -57,6 +57,8 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
     FrmNuevoMantenimientoView frmMantenimientoB = new FrmNuevoMantenimientoView(null, true);
 
     //Controllers
+    MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, frmMantenimientoA, frmMantenimientoB);
+    
     //Constructor
     public DetalleOrdenController(DetalleOrden detalleOrden, DetalleOrdenModel detalleOrdenModel, FrmDetalleOrdenView frmDetalleOrdenA, FrmNuevoDetalleOrdenView frmDetalleOrdenB) {
         this.detalleOrden = detalleOrden;

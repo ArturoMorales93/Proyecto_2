@@ -113,6 +113,7 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         this.frmFacturaB.btnBuscarCliente.addActionListener(this);
         this.frmFacturaB.btnBuscarEmpleado.addActionListener(this);
         this.frmFacturaB.btnBuscarOrden.addActionListener(this);
+        this.frmFacturaB.txtFecha.addFocusListener(this);
     }
 
     //Metodos
@@ -131,17 +132,35 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void focusGained(FocusEvent e) {
-        if (frmFacturaA.txtBuscar.getText().equals("Filtrar por ID de Factura")) {
-            frmFacturaA.txtBuscar.setText(null);
-            frmFacturaA.txtBuscar.setForeground(Color.BLACK);
+        if (frmFacturaA.isActive()) {
+            if (frmFacturaA.txtBuscar.getText().equals("Filtrar por ID de Factura")) {
+                frmFacturaA.txtBuscar.setText(null);
+                frmFacturaA.txtBuscar.setForeground(Color.BLACK);
+            }
+        }
+        
+        if (frmFacturaB.isActive()) {
+            if (frmFacturaB.txtFecha.getText().equals("aaaa/mm/dd")) {
+                frmFacturaB.txtFecha.setText("");
+                frmFacturaB.txtFecha.setForeground(Color.BLACK);
+            }
         }
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if (frmFacturaA.txtBuscar.getText().equals("")) {
-            frmFacturaA.txtBuscar.setText("Filtrar por ID de Factura");
-            frmFacturaA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        if (frmFacturaA.isActive()) {
+            if (frmFacturaA.txtBuscar.getText().equals("")) {
+                frmFacturaA.txtBuscar.setText("Filtrar por ID de Factura");
+                frmFacturaA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+            }
+        }
+        
+        if (frmFacturaB.isActive()) {
+            if (frmFacturaB.txtFecha.getText().equals("    /  /  ")) {
+                frmFacturaB.txtFecha.setText("aaaa/mm/dd");
+                frmFacturaB.txtFecha.setForeground(Color.LIGHT_GRAY);
+            }
         }
     }
 
@@ -324,7 +343,14 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                 frmOrdenTrabajosA.setVisible(true);
             }
             if (e.getSource() == frmFacturaB.btnBuscarEmpleado) {
+                frmEmpleadosA.lblInfo.setVisible(true);
+                frmEmpleadosA.btnNuevo.setVisible(false);
+                frmEmpleadosA.btnEditar.setVisible(false);
+                frmEmpleadosA.btnEliminar.setVisible(false);
+                frmEmpleadosA.tblTabla.addMouseListener(this);
 
+                frmEmpleadosA.setLocationRelativeTo(frmFacturaB.btnBuscarCliente);
+                frmEmpleadosA.setVisible(true);
             }
             if (e.getSource() == frmFacturaB.btnBuscarCliente) {
                 frmClientesA.lblInfo.setVisible(true);
@@ -345,28 +371,30 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         if (e.getClickCount() == 2) {
             
             if (e.getSource() == frmFacturaA.tblTabla) {
+                int fila = frmFacturaA.tblTabla.getSelectedRow();
+                frmDetalleFacturaB.txtFactura.setText(frmFacturaA.tblTabla.getValueAt(fila, 0).toString());
+                frmDetalleFacturaB.setVisible(true);
                 
             }
 
             if (e.getSource() == frmOrdenTrabajosA.tblTabla) {
-
                 int fila = frmOrdenTrabajosA.tblTabla.getSelectedRow();
                 frmFacturaB.txtOrdenTrabajo.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
-                frmClientesA.dispose();
-
+                frmOrdenTrabajosA.dispose();
             }
 
             if (e.getSource() == frmEmpleadosA.tblTabla) {
-
+                int fila = frmEmpleadosA.tblTabla.getSelectedRow();
+                frmFacturaB.txtEmpleado.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
+                frmFacturaB.txtNombreEmpleado.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
+                frmEmpleadosA.dispose();
             }
 
             if (e.getSource() == frmClientesA.tblTabla) {
-
                 int fila = frmClientesA.tblTabla.getSelectedRow();
                 frmFacturaB.txtCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
                 frmFacturaB.txtNombreCliente.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
                 frmClientesA.dispose();
-
             }
 
         }

@@ -57,6 +57,8 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
     FrmNuevoMantenimientoView frmMantenimientoB = new FrmNuevoMantenimientoView(null, true);
 
     //Controllers
+    MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, frmMantenimientoA, frmMantenimientoB);
+    
     //Constructor
     public DetalleFacturaController(DetalleFactura detalleFactura, DetalleFacturaModel detalleFacturaModel, FrmDetalleFacturaView frmDetalleFacturaA, FrmNuevoDetalleFacturaView frmDetalleFacturaB) {
         this.detalleFactura = detalleFactura;

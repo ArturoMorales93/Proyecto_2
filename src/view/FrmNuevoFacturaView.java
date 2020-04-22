@@ -85,7 +85,6 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
             ex.printStackTrace();
         }
         txtFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtFecha.setText("aaaa/mm/dd");
 
         txtOrdenTrabajo.setEditable(false);
         txtOrdenTrabajo.setFocusable(false);
