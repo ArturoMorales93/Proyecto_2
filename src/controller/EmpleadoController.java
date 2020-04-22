@@ -45,7 +45,6 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
         this.frmB = frmB;
 
         //frame a
-        this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);
         this.frmA.lblTexto.setVisible(false);
         this.frmA.lblInfo.setVisible(false);

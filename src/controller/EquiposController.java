@@ -56,7 +56,6 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
         this.frmA = frmA;
         this.frmB = frmB;
 
-        this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);
         this.frmA.lblTexto.setVisible(false);
         this.frmA.lblInfo.setVisible(false);

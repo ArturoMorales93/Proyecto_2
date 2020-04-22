@@ -40,34 +40,27 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
     private DetalleOrdenModel detalleOrdenModel;
     private FrmDetalleOrdenView frmDetalleOrdenA;
     private FrmNuevoDetalleOrdenView frmDetalleOrdenB;
+    private int idOrdenTrabajo;
 
     private DefaultTableModel modelo;
     private int opcion;
 
-    //JavaBeans
     Mantenimiento mantenimiento = new Mantenimiento();
-
-    //Models
     MantenimientoModel mantenimientoModel = new MantenimientoModel();
-
-    //Frames A
     FrmMantenimientoView frmMantenimientoA = new FrmMantenimientoView(null, true);
-
-    //Frames B
     FrmNuevoMantenimientoView frmMantenimientoB = new FrmNuevoMantenimientoView(null, true);
-
-    //Controllers
     MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, frmMantenimientoA, frmMantenimientoB);
-    
+
     //Constructor
-    public DetalleOrdenController(DetalleOrden detalleOrden, DetalleOrdenModel detalleOrdenModel, FrmDetalleOrdenView frmDetalleOrdenA, FrmNuevoDetalleOrdenView frmDetalleOrdenB) {
+    public DetalleOrdenController(DetalleOrden detalleOrden, DetalleOrdenModel detalleOrdenModel, FrmDetalleOrdenView frmDetalleOrdenA, FrmNuevoDetalleOrdenView frmDetalleOrdenB,
+            int idOrdenTrabajo) {
         this.detalleOrden = detalleOrden;
         this.detalleOrdenModel = detalleOrdenModel;
         this.frmDetalleOrdenA = frmDetalleOrdenA;
         this.frmDetalleOrdenB = frmDetalleOrdenB;
+        this.idOrdenTrabajo = idOrdenTrabajo;
 
         //Componentes del FrameA
-        this.frmDetalleOrdenA.setLocationRelativeTo(null);
         this.frmDetalleOrdenA.addWindowListener(this);
         this.frmDetalleOrdenA.tblTabla.requestFocus();
         this.frmDetalleOrdenA.tblTabla.getTableHeader().setResizingAllowed(false);
@@ -79,7 +72,6 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
         this.frmDetalleOrdenA.txtBuscar.addFocusListener(this);
 
         //Componentes del FrameB
-        this.frmDetalleOrdenB.setLocationRelativeTo(null);
         this.frmDetalleOrdenB.btnGuardar.addActionListener(this);
         this.frmDetalleOrdenB.btnLimpiar.addActionListener(this);
         this.frmDetalleOrdenB.btnCancelar.addActionListener(this);
@@ -123,13 +115,13 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
         frmDetalleOrdenA.txtBuscar.setText("Filtrar por ID de Detalle");
         frmDetalleOrdenA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmDetalleOrdenA.tblTabla.requestFocus();
-        ResultSet rs = detalleOrdenModel.mostrarDetalleOrden();
+        ResultSet rs = detalleOrdenModel.mostrarDetalleOrden(idOrdenTrabajo);
 
         try {
 
             if (rs.isFirst()) {
                 do {
-                    detalleOrden = new DetalleOrden(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                    detalleOrden = new DetalleOrden(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5));
                     Object newRow[] = {detalleOrden.getIdDetalleOrden(), detalleOrden.getIdOrdenTrabajo(), detalleOrden.getIdMantenimiento(),
                         detalleOrden.getPrecio(), detalleOrden.getObservaciones()};
                     modelo.addRow(newRow);
@@ -159,7 +151,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
             if (rs.isFirst()) {
                 do {
-                    detalleOrden = new DetalleOrden(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                    detalleOrden = new DetalleOrden(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5));
                     Object newRow[] = {detalleOrden.getIdDetalleOrden(), detalleOrden.getIdOrdenTrabajo(), detalleOrden.getIdMantenimiento(),
                         detalleOrden.getPrecio(), detalleOrden.getObservaciones()};
                     modelo.addRow(newRow);
@@ -183,6 +175,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
                     opcion = 1;
                     frmDetalleOrdenB.setTitle("Registro de DetalleOrden");
                     limpiarFrmB();
+                    frmDetalleOrdenB.setLocationRelativeTo(frmDetalleOrdenA.btnNuevo);
                     frmDetalleOrdenB.setVisible(true);
                     break;
 
@@ -199,6 +192,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
                         frmDetalleOrdenB.txtPrecio.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 3).toString());
                         frmDetalleOrdenB.txtMantenimiento.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 4).toString());
 
+                        frmDetalleOrdenB.setLocationRelativeTo(frmDetalleOrdenA.btnNuevo);
                         frmDetalleOrdenB.setVisible(true);
 
                     } else {
@@ -235,7 +229,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
                 case "Guardar":
                     try {
                     detalleOrden.setIdOrdenTrabajo(Integer.parseInt(frmDetalleOrdenB.txtOrden.getText().trim()));
-                    detalleOrden.setIdMantenimiento(Integer.parseInt(frmDetalleOrdenB.txtMantenimiento.getText().trim()));
+                    detalleOrden.setIdMantenimiento((frmDetalleOrdenB.txtMantenimiento.getText().trim()));
                     detalleOrden.setPrecio(Integer.parseInt(frmDetalleOrdenB.txtPrecio.getText().trim()));
                     detalleOrden.setObservaciones(frmDetalleOrdenB.txaObservaciones.getText().trim());
                 } catch (NumberFormatException ex) {
@@ -270,7 +264,15 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
             }
 
             if (e.getSource() == frmDetalleOrdenB.btnBuscarMantenimiento) {
+                frmMantenimientoA.lblInfo.setVisible(true);
+                frmMantenimientoA.btnNuevo.setVisible(false);
+                frmMantenimientoA.btnEditar.setVisible(false);
+                frmMantenimientoA.btnEliminar.setVisible(false);
+                frmMantenimientoA.tblTabla.addMouseListener(this);
 
+                frmMantenimientoA.setLocationRelativeTo(frmDetalleOrdenB.btnBuscarMantenimiento);
+                frmMantenimientoA.setModal(true);
+                frmMantenimientoA.setVisible(true);
             }
         }
 

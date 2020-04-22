@@ -22,16 +22,22 @@ public class DetalleFacturaModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarDetalleFactura(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarDetalleFactura(?,?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, detalleFactura.getIdDetalleFactura());
+            cst.setInt(2, detalleFactura.getIdFactura());
+            cst.setInt(3, detalleFactura.getCantidad());
+            cst.setInt(4, detalleFactura.getIdMantenimiento());
+            cst.setInt(5, detalleFactura.getPrecio());
+            cst.setInt(6, detalleFactura.getSubTotal());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(7);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +52,22 @@ public class DetalleFacturaModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarDetalleFactura(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarDetalleFactura(?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, detalleFactura.getIdDetalleFactura());
+            cst.setInt(2, detalleFactura.getIdFactura());
+            cst.setInt(3, detalleFactura.getCantidad());
+            cst.setInt(4, detalleFactura.getIdMantenimiento());
+            cst.setInt(5, detalleFactura.getPrecio());
+            cst.setInt(6, detalleFactura.getSubTotal());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(7, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(7);
 
         } catch (SQLException e) {
             return false;
@@ -89,12 +101,12 @@ public class DetalleFacturaModel {
         }
     }
 
-    public ResultSet mostrarDetalleFactura() {
+    public ResultSet mostrarDetalleFactura(int idFactura) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from detalleFactura");
+        db.ejecutarSqlSelect("Select * from detalleFactura where idFactura = " + idFactura);
         rs = db.obtenerRegistro();
 
         return rs;

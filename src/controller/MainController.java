@@ -94,43 +94,56 @@ public class MainController implements ActionListener {
         //Controllers
         EquiposController equipoController = new EquiposController(equipo, equipoModel, winEquiposA, winEquiposB);
         ClienteController clienteController = new ClienteController(cliente, clienteModel, winClientesA, winClientesB);
-        FacturaController facturaController = new FacturaController(factura, facturaModel, winFacturacionA, winFacturacionB);
-        OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
+        FacturaController facturaController = new FacturaController(factura, facturaModel, winFacturacionA, winFacturacionB, winClientesA, winEmpleadosA, winOrdenTrabajoA);
+        OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB, winEquiposA, winClientesA, winEmpleadosA, winFacturacionB);
         MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, winMantenimientoA, winMantenimientoB);
         EmpleadoController empleadoController = new EmpleadoController(empleado, empleadoModel, winEmpleadosA, winEmpleadosB);
     }
 
     //Metodos
-    public void iniciarVista(){
+    public void iniciarVista() {
         this.winTiendaElectronica.setLocationRelativeTo(null);
         this.winTiendaElectronica.setVisible(true);
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         switch (e.getActionCommand()) {
             case "Clientes":
+                winClientesA.setLocationRelativeTo(null);
+                winClientesA.setModal(false);
                 winClientesA.setVisible(true);
                 break;
 
             case "Equipos":
+                winEquiposA.setLocationRelativeTo(null);
+                winEquiposA.setModal(false);
                 winEquiposA.setVisible(true);
                 break;
 
             case "Empleados":
+                winEmpleadosA.setLocationRelativeTo(null);
+                winEmpleadosA.setModal(false);
                 winEmpleadosA.setVisible(true);
                 break;
 
             case "Orden de trabajo":
+                winOrdenTrabajoA.lblTexto.setText("Para acceder a los detalles de una Orden, haga doble click sobre el registro.");
+                winOrdenTrabajoA.setLocationRelativeTo(null);
+                winOrdenTrabajoA.setModal(false);
                 winOrdenTrabajoA.setVisible(true);
                 break;
 
             case "Mantenimiento":
+                winMantenimientoA.setLocationRelativeTo(null);
+                winMantenimientoA.setModal(false);
                 winMantenimientoA.setVisible(true);
                 break;
 
             case "Facturación":
+                winFacturacionA.setLocationRelativeTo(null);
+                winFacturacionA.setModal(false);
                 winFacturacionA.setVisible(true);
                 break;
         }

@@ -40,34 +40,27 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
     private DetalleFacturaModel detalleFacturaModel;
     private FrmDetalleFacturaView frmDetalleFacturaA;
     private FrmNuevoDetalleFacturaView frmDetalleFacturaB;
+    private int idFactura;
 
     private DefaultTableModel modelo;
     private int opcion;
 
-    //JavaBeans
     Mantenimiento mantenimiento = new Mantenimiento();
-
-    //Models
     MantenimientoModel mantenimientoModel = new MantenimientoModel();
-
-    //Frames A
     FrmMantenimientoView frmMantenimientoA = new FrmMantenimientoView(null, true);
-
-    //Frames B
     FrmNuevoMantenimientoView frmMantenimientoB = new FrmNuevoMantenimientoView(null, true);
-
-    //Controllers
     MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, frmMantenimientoA, frmMantenimientoB);
-    
+
     //Constructor
-    public DetalleFacturaController(DetalleFactura detalleFactura, DetalleFacturaModel detalleFacturaModel, FrmDetalleFacturaView frmDetalleFacturaA, FrmNuevoDetalleFacturaView frmDetalleFacturaB) {
+    public DetalleFacturaController(DetalleFactura detalleFactura, DetalleFacturaModel detalleFacturaModel, FrmDetalleFacturaView frmDetalleFacturaA, FrmNuevoDetalleFacturaView frmDetalleFacturaB,
+            int idFactura) {
         this.detalleFactura = detalleFactura;
         this.detalleFacturaModel = detalleFacturaModel;
         this.frmDetalleFacturaA = frmDetalleFacturaA;
         this.frmDetalleFacturaB = frmDetalleFacturaB;
+        this.idFactura = idFactura;
 
         //Componentes del FrameA
-        this.frmDetalleFacturaA.setLocationRelativeTo(null);
         this.frmDetalleFacturaA.addWindowListener(this);
         this.frmDetalleFacturaA.tblTabla.requestFocus();
         this.frmDetalleFacturaA.tblTabla.getTableHeader().setResizingAllowed(false);
@@ -83,16 +76,16 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
         this.frmDetalleFacturaB.btnGuardar.addActionListener(this);
         this.frmDetalleFacturaB.btnLimpiar.addActionListener(this);
         this.frmDetalleFacturaB.btnCancelar.addActionListener(this);
-        this.frmDetalleFacturaB.btnBuscarFactura.addActionListener(this);
+        this.frmDetalleFacturaB.btnBuscarMantenimiento.addActionListener(this);
     }
 
     //Metodos
     public void limpiarFrmB() {
-        frmDetalleFacturaB.txtFactura.setText(null);
+        frmDetalleFacturaB.txtMantenimiento.setText(null);
         frmDetalleFacturaB.txtCantidad.setText(null);
         frmDetalleFacturaB.txtSubTotal.setText(null);
         frmDetalleFacturaB.txtPrecio.setText(null);
-        frmDetalleFacturaB.btnBuscarFactura.requestFocus();
+        frmDetalleFacturaB.btnBuscarMantenimiento.requestFocus();
     }
 
     @Override
@@ -124,7 +117,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
         frmDetalleFacturaA.txtBuscar.setText("Filtrar por ID de Detalle");
         frmDetalleFacturaA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmDetalleFacturaA.tblTabla.requestFocus();
-        ResultSet rs = detalleFacturaModel.mostrarDetalleFactura();
+        ResultSet rs = detalleFacturaModel.mostrarDetalleFactura(idFactura);
 
         try {
 
@@ -184,6 +177,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
                     opcion = 1;
                     frmDetalleFacturaB.setTitle("Registro de DetalleFactura");
                     limpiarFrmB();
+                    frmDetalleFacturaB.setLocationRelativeTo(frmDetalleFacturaA.btnNuevo);
                     frmDetalleFacturaB.setVisible(true);
                     break;
 
@@ -201,6 +195,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
                         frmDetalleFacturaB.txtPrecio.setText(frmDetalleFacturaA.tblTabla.getValueAt(fila, 4).toString());
                         frmDetalleFacturaB.txtSubTotal.setText(frmDetalleFacturaA.tblTabla.getValueAt(fila, 5).toString());
 
+                        frmDetalleFacturaB.setLocationRelativeTo(frmDetalleFacturaA.btnNuevo);
                         frmDetalleFacturaB.setVisible(true);
 
                     } else {
@@ -272,8 +267,16 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
             }
 
-            if (e.getSource() == frmDetalleFacturaB.btnBuscarFactura) {
+            if (e.getSource() == frmDetalleFacturaB.btnBuscarMantenimiento) {
+                frmMantenimientoA.lblInfo.setVisible(true);
+                frmMantenimientoA.btnNuevo.setVisible(false);
+                frmMantenimientoA.btnEditar.setVisible(false);
+                frmMantenimientoA.btnEliminar.setVisible(false);
+                frmMantenimientoA.tblTabla.addMouseListener(this);
 
+                frmMantenimientoA.setLocationRelativeTo(frmDetalleFacturaB.btnBuscarMantenimiento);
+                frmMantenimientoA.setModal(true);
+                frmMantenimientoA.setVisible(true);
             }
         }
 
@@ -286,7 +289,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
             if (e.getSource() == frmMantenimientoA.tblTabla) {
 
                 int fila = frmMantenimientoA.tblTabla.getSelectedRow();
-                frmDetalleFacturaB.txtFactura.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 0).toString());
+                frmDetalleFacturaB.txtMantenimiento.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 0).toString());
                 frmMantenimientoA.dispose();
 
             }

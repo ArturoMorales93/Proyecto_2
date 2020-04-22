@@ -22,16 +22,24 @@ public class FacturaModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarFactura(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarFactura(?,?,?,?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, factura.getIdFactura());
+            cst.setString(2, factura.getFecha());
+            cst.setInt(3, factura.getIdOrden());
+            cst.setString(4, factura.getIdEmpleado());
+            cst.setInt(5, factura.getIdCliente());
+            cst.setInt(6, factura.getImpuesto());
+            cst.setInt(7, factura.getSubTotal());
+            cst.setInt(8, factura.getTotal());
+            
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(9, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(9);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +54,24 @@ public class FacturaModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarFactura(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarFactura(?,?,?,?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, factura.getIdFactura());
+            cst.setString(2, factura.getFecha());
+            cst.setInt(3, factura.getIdOrden());
+            cst.setString(4, factura.getIdEmpleado());
+            cst.setInt(5, factura.getIdCliente());
+            cst.setInt(6, factura.getImpuesto());
+            cst.setInt(7, factura.getSubTotal());
+            cst.setInt(8, factura.getTotal());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(9, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(9);
 
         } catch (SQLException e) {
             return false;

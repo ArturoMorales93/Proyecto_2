@@ -22,16 +22,21 @@ public class DetalleOrdenModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarDetalleOrden(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarDetalleOrden(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, detalleOrden.getIdDetalleOrden());
+            cst.setInt(2, detalleOrden.getIdOrdenTrabajo());
+            cst.setString(3, detalleOrden.getIdMantenimiento());
+            cst.setInt(4, detalleOrden.getPrecio());
+            cst.setString(5, detalleOrden.getObservaciones());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +51,21 @@ public class DetalleOrdenModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarDetalleOrden(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarDetalleOrden(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, detalleOrden.getIdDetalleOrden());
+            cst.setInt(2, detalleOrden.getIdOrdenTrabajo());
+            cst.setString(3, detalleOrden.getIdMantenimiento());
+            cst.setInt(4, detalleOrden.getPrecio());
+            cst.setString(5, detalleOrden.getObservaciones());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -89,17 +99,17 @@ public class DetalleOrdenModel {
         }
     }
 
-    public ResultSet mostrarDetalleOrden() {
+    public ResultSet mostrarDetalleOrden(int idOrdenTrabajo) {
 
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from detalleOrden");
+        db.ejecutarSqlSelect("Select * from detalleOrden where idOrden = " + idOrdenTrabajo);
         rs = db.obtenerRegistro();
 
         return rs;
     }
-    
+
     public ResultSet filtrarDetalleOrden(String texto) {
 
         DataBase db = new DataBase();

@@ -47,7 +47,6 @@ public class MantenimientoController implements WindowListener, ActionListener, 
         this.frmB = frmB;
 
         //Componentes del FrameA
-        this.frmA.setLocationRelativeTo(null);
         this.frmA.addWindowListener(this);
         this.frmA.lblTexto.setVisible(false);
         this.frmA.lblInfo.setVisible(false);

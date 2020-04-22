@@ -16,7 +16,7 @@ public class DetalleOrden implements Serializable {
     //Atributos
     private int idDetalleOrden;
     private int idOrdenTrabajo;
-    private int idMantenimiento;
+    private String idMantenimiento;
     private int precio;
     private String observaciones;
 
@@ -24,12 +24,12 @@ public class DetalleOrden implements Serializable {
     public DetalleOrden() {
         this.idDetalleOrden = 0;
         this.idOrdenTrabajo = 0;
-        this.idMantenimiento = 0;
+        this.idMantenimiento = null;
         this.precio = 0;
         this.observaciones = null;
     }
 
-    public DetalleOrden(int idDetalleOrden, int idOrdenTrabajo, int idMantenimiento, int precio, String observaciones) {
+    public DetalleOrden(int idDetalleOrden, int idOrdenTrabajo, String idMantenimiento, int precio, String observaciones) {
         this.idDetalleOrden = idDetalleOrden;
         this.idOrdenTrabajo = idOrdenTrabajo;
         this.idMantenimiento = idMantenimiento;
@@ -54,11 +54,11 @@ public class DetalleOrden implements Serializable {
         this.idOrdenTrabajo = idOrdenTrabajo;
     }
 
-    public int getIdMantenimiento() {
+    public String getIdMantenimiento() {
         return idMantenimiento;
     }
 
-    public void setIdMantenimiento(int idMantenimiento) {
+    public void setIdMantenimiento(String idMantenimiento) {
         this.idMantenimiento = idMantenimiento;
     }
 

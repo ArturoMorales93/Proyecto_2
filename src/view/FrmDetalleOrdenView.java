@@ -40,7 +40,7 @@ public class FrmDetalleOrdenView extends javax.swing.JDialog {
         lblCantidadRegistros = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestión de Ordenes de Trabajo");
+        setTitle("Detalles de Ordenes de Trabajo");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
