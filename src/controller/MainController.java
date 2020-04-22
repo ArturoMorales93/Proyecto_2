@@ -97,6 +97,7 @@ public class MainController implements ActionListener {
         FacturaController facturaController = new FacturaController(factura, facturaModel, winFacturacionA, winFacturacionB);
         OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, winOrdenTrabajoA, winOrdenTrabajoB);
         MantenimientoController mantenimientoController = new MantenimientoController(mantenimiento, mantenimientoModel, winMantenimientoA, winMantenimientoB);
+        EmpleadoController empleadoController = new EmpleadoController(empleado, empleadoModel, winEmpleadosA, winEmpleadosB);
     }
 
     //Metodos
