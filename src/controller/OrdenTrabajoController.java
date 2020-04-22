@@ -22,6 +22,7 @@ import javaBeans.Cliente;
 import javaBeans.DetalleOrden;
 import javaBeans.Empleado;
 import javaBeans.Equipo;
+import javaBeans.Factura;
 import javaBeans.OrdenTrabajo;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -29,15 +30,18 @@ import model.ClienteModel;
 import model.DetalleOrdenModel;
 import model.EmpleadoModel;
 import model.EquipoModel;
+import model.FacturaModel;
 import model.OrdenTrabajoModel;
 import view.FrmClientesView;
 import view.FrmDetalleOrdenView;
 import view.FrmEmpleadosView;
 import view.FrmEquiposView;
+import view.FrmFacturacionView;
 import view.FrmNuevoClienteView;
 import view.FrmNuevoDetalleOrdenView;
 import view.FrmNuevoEmpleadoView;
 import view.FrmNuevoEquipoView;
+import view.FrmNuevoFacturaView;
 import view.FrmOrdenTrabajoView;
 import view.FrmNuevoOrdenTrabajoView;
 
@@ -59,12 +63,14 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     //JavaBeans
     Equipo equipo = new Equipo();
     Cliente cliente = new Cliente();
+    Factura factura = new Factura();
     Empleado empleado = new Empleado();
     DetalleOrden detalleOrden = new DetalleOrden();
 
     //Models
     EquipoModel equipoModel = new EquipoModel();
     ClienteModel clienteModel = new ClienteModel();
+    FacturaModel facturaModel = new FacturaModel();
     EmpleadoModel empleadoModel = new EmpleadoModel();
     DetalleOrdenModel detalleOrdenModel = new DetalleOrdenModel();
 
@@ -72,17 +78,21 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
     FrmEquiposView frmEquiposA = new FrmEquiposView(null, true);
     FrmClientesView frmClientesA = new FrmClientesView(null, true);
     FrmEmpleadosView frmEmpleadosA = new FrmEmpleadosView(null, true);
+    FrmFacturacionView frmFacturaA = new FrmFacturacionView(null, true);
     FrmDetalleOrdenView frmDetalleOrdenA = new FrmDetalleOrdenView(null, true);
 
     //Frames B
     FrmNuevoEquipoView frmEquiposB = new FrmNuevoEquipoView(null, true);
+    FrmNuevoFacturaView frmFacturaB = new FrmNuevoFacturaView(null, true);
     FrmNuevoClienteView frmClientesB = new FrmNuevoClienteView(null, true);
     FrmNuevoEmpleadoView frmEmpleadosB = new FrmNuevoEmpleadoView(null, true);
     FrmNuevoDetalleOrdenView frmDetalleOrdenB = new FrmNuevoDetalleOrdenView(null, true);
 
     //Controllers
     EquiposController equipoController = new EquiposController(equipo, equipoModel, frmEquiposA, frmEquiposB);
+    FacturaController facturaController = new FacturaController(factura, facturaModel, frmFacturaA, frmFacturaB);
     ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
+    EmpleadoController empleadoController = new EmpleadoController(empleado, empleadoModel, frmEmpleadosA, frmEmpleadosB);
     DetalleOrdenController detalleOrdenController = new DetalleOrdenController(detalleOrden, detalleOrdenModel, frmDetalleOrdenA, frmDetalleOrdenB);
 
     //Constructor
@@ -100,6 +110,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
         this.frmOrdenTrabajoA.tblTabla.requestFocus();
         this.frmOrdenTrabajoA.tblTabla.getTableHeader().setResizingAllowed(false);
         this.frmOrdenTrabajoA.tblTabla.getTableHeader().setReorderingAllowed(false);
+        this.frmOrdenTrabajoA.tblTabla.addMouseListener(this);
         this.frmOrdenTrabajoA.btnNuevo.addActionListener(this);
         this.frmOrdenTrabajoA.btnEditar.addActionListener(this);
         this.frmOrdenTrabajoA.btnEliminar.addActionListener(this);
@@ -343,9 +354,15 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
         if (e.getClickCount() == 2) {
 
             if (e.getSource() == frmOrdenTrabajoA.tblTabla) {
-                int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
-                frmDetalleOrdenB.txtOrden.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString());
-                frmDetalleOrdenB.setVisible(true);
+
+                if (frmOrdenTrabajoA.lblTexto.getText().equals("Para acceder a los detalles de una Orden, haga doble click sobre el registro.")) {
+                    frmDetalleOrdenA.setVisible(true);
+                } else {
+                    int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
+                    frmFacturaB.txtOrdenTrabajo.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString());
+                    frmOrdenTrabajoA.dispose();
+                }
+
             }
 
             if (e.getSource() == frmClientesA.tblTabla) {
@@ -414,12 +431,16 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        frmOrdenTrabajoA.lblTexto.setVisible(true);
+        if (e.getSource() == frmOrdenTrabajoA.lblInfo) {
+            frmOrdenTrabajoA.lblTexto.setVisible(true);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        frmOrdenTrabajoA.lblTexto.setVisible(false);
+        if (e.getSource() == frmOrdenTrabajoA.lblInfo) {
+            frmOrdenTrabajoA.lblTexto.setVisible(false);
+        }
     }
 
 }

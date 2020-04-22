@@ -22,16 +22,21 @@ public class OrdenTrabajoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarOrdenTrabajo(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarOrdenDeTrabajo(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+            cst.setInt(1, ordenTrabajo.getIdOrdenTrabajo());
+            cst.setInt(2, ordenTrabajo.getIdCliente());
+            cst.setString(3, ordenTrabajo.getIdEmpleado());
+            cst.setInt(4, ordenTrabajo.getIdEquipo());
+            cst.setInt(5, ordenTrabajo.getTotal());
+            
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +51,21 @@ public class OrdenTrabajoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarOrdenTrabajo(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarOrdenDeTrabajo(?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
+            cst.setInt(1, ordenTrabajo.getIdOrdenTrabajo());
+            cst.setInt(2, ordenTrabajo.getIdCliente());
+            cst.setString(3, ordenTrabajo.getIdEmpleado());
+            cst.setInt(4, ordenTrabajo.getIdEquipo());
+            cst.setInt(5, ordenTrabajo.getTotal());
 
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(6);
 
         } catch (SQLException e) {
             return false;
@@ -70,7 +80,7 @@ public class OrdenTrabajoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_eliminarOrdenTrabajo(?,?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_eliminarOrdenDeTrabajo(?,?)");
             //Parametros de entrada del procedimiento almacenado
             cst.setInt(1, idOrdenTrabajo);
 

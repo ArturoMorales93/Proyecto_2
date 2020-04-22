@@ -71,18 +71,20 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
     //Frames A
     FrmClientesView frmClientesA = new FrmClientesView(null, true);
     FrmEmpleadosView frmEmpleadosA = new FrmEmpleadosView(null, true);
-    FrmOrdenTrabajoView frmOrdenTrabajosA = new FrmOrdenTrabajoView(null, true);
+    FrmOrdenTrabajoView frmOrdenTrabajoA = new FrmOrdenTrabajoView(null, true);
     FrmDetalleFacturaView frmDetalleFacturaA = new FrmDetalleFacturaView(null, true);
 
     //Frames B
     FrmNuevoClienteView frmClientesB = new FrmNuevoClienteView(null, true);
     FrmNuevoEmpleadoView frmEmpleadosB = new FrmNuevoEmpleadoView(null, true);
-    FrmNuevoOrdenTrabajoView frmOrdenTrabajosB = new FrmNuevoOrdenTrabajoView(null, true);
+    FrmNuevoOrdenTrabajoView frmOrdenTrabajoB = new FrmNuevoOrdenTrabajoView(null, true);
     FrmNuevoDetalleFacturaView frmDetalleFacturaB = new FrmNuevoDetalleFacturaView(null, true);
 
     //Controllers
     ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
-    OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, frmOrdenTrabajosA, frmOrdenTrabajosB);
+    EmpleadoController empleadoController = new EmpleadoController(empleado, empleadoModel, frmEmpleadosA, frmEmpleadosB);
+    OrdenTrabajoController ordenTrabajoController = new OrdenTrabajoController(ordenTrabajo, ordenTrabajoModel, frmOrdenTrabajoA, frmOrdenTrabajoB);
+    DetalleFacturaController detalleFacturaController = new DetalleFacturaController(detalleFactura, detalleFacturaModel, frmDetalleFacturaA, frmDetalleFacturaB);
 
     //Constructor
     public FacturaController(Factura factura, FacturaModel facturaModel, FrmFacturacionView frmFacturaA, FrmNuevoFacturaView frmFacturaB) {
@@ -333,14 +335,14 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
             }
 
             if (e.getSource() == frmFacturaB.btnBuscarOrden) {
-                frmOrdenTrabajosA.btnNuevo.setVisible(false);
-                frmOrdenTrabajosA.btnEditar.setVisible(false);
-                frmOrdenTrabajosA.btnEliminar.setVisible(false);
-                frmOrdenTrabajosA.tblTabla.addMouseListener(this);
-                frmOrdenTrabajosA.lblTexto.setText("Haga doble click sobre un registro para seleccionarlo.");
+                frmOrdenTrabajoA.btnNuevo.setVisible(false);
+                frmOrdenTrabajoA.btnEditar.setVisible(false);
+                frmOrdenTrabajoA.btnEliminar.setVisible(false);
+                frmOrdenTrabajoA.tblTabla.addMouseListener(this);
+                frmOrdenTrabajoA.lblTexto.setText("Haga doble click sobre un registro para seleccionarlo.");
 
-                frmOrdenTrabajosA.setLocationRelativeTo(frmFacturaB.btnBuscarCliente);
-                frmOrdenTrabajosA.setVisible(true);
+                frmOrdenTrabajoA.setLocationRelativeTo(frmFacturaB.btnBuscarCliente);
+                frmOrdenTrabajoA.setVisible(true);
             }
             if (e.getSource() == frmFacturaB.btnBuscarEmpleado) {
                 frmEmpleadosA.lblInfo.setVisible(true);
@@ -377,16 +379,16 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                 
             }
 
-            if (e.getSource() == frmOrdenTrabajosA.tblTabla) {
-                int fila = frmOrdenTrabajosA.tblTabla.getSelectedRow();
-                frmFacturaB.txtOrdenTrabajo.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
-                frmOrdenTrabajosA.dispose();
-            }
+//            if (e.getSource() == frmOrdenTrabajoA.tblTabla) {
+//                int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
+//                frmFacturaB.txtOrdenTrabajo.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString());
+//                frmOrdenTrabajoA.dispose();
+//            }
 
             if (e.getSource() == frmEmpleadosA.tblTabla) {
                 int fila = frmEmpleadosA.tblTabla.getSelectedRow();
-                frmFacturaB.txtEmpleado.setText(frmClientesA.tblTabla.getValueAt(fila, 0).toString());
-                frmFacturaB.txtNombreEmpleado.setText(frmClientesA.tblTabla.getValueAt(fila, 1).toString());
+                frmFacturaB.txtEmpleado.setText(frmEmpleadosA.tblTabla.getValueAt(fila, 0).toString());
+                frmFacturaB.txtNombreEmpleado.setText(frmEmpleadosA.tblTabla.getValueAt(fila, 1).toString());
                 frmEmpleadosA.dispose();
             }
 

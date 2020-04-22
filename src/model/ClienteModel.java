@@ -29,6 +29,7 @@ public class ClienteModel {
             cst.setInt(3, cliente.getNumeroTelefono());
             cst.setString(4, cliente.getDireccion());
             cst.setString(5, cliente.getEmail());
+            
             //Parametro de salida del procedimiento almacenado
             cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
