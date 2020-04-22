@@ -22,16 +22,19 @@ public class EmpleadoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarEmpleado(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_insertarEmpleado(?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+              cst.setString(1, empleado.getIdEmpleado());
+              cst.setString(2, empleado.getNombreEmpleado());
+              cst.setString(3, empleado.getTipoEmpleado());
+              cst.setInt(4, empleado.getCodigoEmpresarial());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(5, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(5);
 
         } catch (SQLException e) {
             return false;
@@ -46,16 +49,19 @@ public class EmpleadoModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_modificarEmpleado(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarEmpleado(?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
-
+               cst.setString(1, empleado.getIdEmpleado());
+              cst.setString(2, empleado.getNombreEmpleado());
+              cst.setString(3, empleado.getTipoEmpleado());
+              cst.setInt(4, empleado.getCodigoEmpresarial());
             //Parametro de salida del procedimiento almacenado
-            cst.registerOutParameter(1, java.sql.Types.BOOLEAN);
+            cst.registerOutParameter(5, java.sql.Types.BOOLEAN);
 
             //Ejecucion del procedimiento almacenado
             cst.execute();
 
-            return cst.getBoolean(1);
+            return cst.getBoolean(5);
 
         } catch (SQLException e) {
             return false;

@@ -53,7 +53,7 @@ public class FrmNuevoEmpleadoView extends javax.swing.JDialog {
 
         jLabel3.setText("Tipo Empleado:");
 
-        cmbTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3" }));
+        cmbTipoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Técnico", "Administrativo", "Dependiente", "Cajero" }));
 
         jLabel4.setText("Código Empresarial:");
 
