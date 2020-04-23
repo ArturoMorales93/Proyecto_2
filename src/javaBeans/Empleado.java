@@ -21,9 +21,9 @@ public class Empleado implements Serializable {
 
     //Constructores
     public Empleado() {
-        this.idEmpleado = " ";
-        this.nombreEmpleado = " ";
-        this.tipoEmpleado = " ";
+        this.idEmpleado = null;
+        this.nombreEmpleado = null;
+        this.tipoEmpleado = null;
         this.codigoEmpresarial = 0;
     }
 

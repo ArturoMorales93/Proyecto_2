@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Exepciones.ProyectoException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Empleado;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 import javax.swing.table.DefaultTableModel;
 import model.EmpleadoModel;
 import view.FrmEmpleadosView;
@@ -128,13 +130,21 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
 
                 case "Guardar":
                     try {
+
+                    if (frmB.cmbTipoEmpleado.getSelectedIndex() == 0) {
+                        throw new ProyectoException(1);
+                     
+                    }
+
                     empleado.setIdEmpleado(frmB.txtIdUsuario.getText());
                     empleado.setNombreEmpleado(frmB.txtNombre.getText().trim());
                     empleado.setTipoEmpleado(String.valueOf(frmB.cmbTipoEmpleado.getSelectedItem()));
                     empleado.setCodigoEmpresarial(Integer.parseInt(frmB.txtCodigo.getText().trim()));
 
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
+                    JOptionPane.showMessageDialog(frmB, "Error de tipo de datos\nRevise");
+                } catch (ProyectoException exc) {
+                    JOptionPane.showMessageDialog(frmB, exc.getMessage(), "Aviso!", INFORMATION_MESSAGE);
                 }
 
                 if (opcion == 1) {
@@ -142,14 +152,14 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
                         JOptionPane.showMessageDialog(frmB, "Empleado Registrado");
                         frmB.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(frmB, "Error al guardar");
+                        JOptionPane.showMessageDialog(frmB, "Error al guardar\nRevise Los Campos");
                     }
                 } else {
                     if (empleadoModel.modificarEmpleado(empleado)) {
                         JOptionPane.showMessageDialog(frmB, "Empleado Actualizado");
                         frmB.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(frmB, "Error al editar");
+                        JOptionPane.showMessageDialog(frmB, "Error al editar\nRevise los campos");
                     }
                 }
                 break;
@@ -252,7 +262,6 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
 
     @Override
     public void mouseReleased(MouseEvent e) {
-       
 
     }
 
@@ -278,7 +287,7 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
 
     @Override
     public void keyReleased(KeyEvent e) {
- String columnas[] = {"ID Empleado", "Nombre Empleado", "Tipo Empleado", "Código Empresarial"};
+        String columnas[] = {"ID Empleado", "Nombre Empleado", "Tipo Empleado", "Código Empresarial"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -286,7 +295,6 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
             }
         };
 
-   
         ResultSet rs = empleadoModel.filtrarEmpleado(frmA.txtBuscar.getText().trim());
 
         try {

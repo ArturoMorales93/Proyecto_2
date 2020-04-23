@@ -20,8 +20,8 @@ public class Mantenimiento implements Serializable {
 
     //Constructores
     public Mantenimiento() {
-        this.idMantenimiento = "";
-        this.descripcion = "";
+        this.idMantenimiento = null;
+        this.descripcion = null;
         this.precio = 0;
     }
 

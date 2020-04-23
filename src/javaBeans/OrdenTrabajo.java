@@ -24,7 +24,7 @@ public class OrdenTrabajo implements Serializable {
     public OrdenTrabajo() {
         this.idOrdenTrabajo = 0;
         this.idCliente = 0;
-        this.idEmpleado = "";
+        this.idEmpleado = null;
         this.idEquipo = 0;
         this.total = 0;
     }

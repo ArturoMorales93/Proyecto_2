@@ -5,6 +5,7 @@
  */
 package controller;
 
+import Exepciones.ProyectoException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javaBeans.Cliente;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 import javax.swing.table.DefaultTableModel;
 import model.ClienteModel;
 import view.FrmClientesView;
@@ -225,13 +227,21 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
                 case "Guardar":
                     try {
-                    cliente.setIdCliente(Integer.parseInt(frmB.txtIdCliente.getText()));
-                    cliente.setNombreCliente(frmB.txtNombre.getText().trim());
-                    cliente.setNumeroTelefono(Integer.parseInt(frmB.txtTelefono.getText().trim()));
-                    cliente.setDireccion(frmB.txtDireccion.getText().trim());
-                    cliente.setEmail(frmB.txtCorreo.getText().trim());
+                    if (frmB.txtCorreo.getText().equals("") && frmB.txtDireccion.getText().equals("") && frmB.txtIdCliente.getText().equals("") && frmB.txtNombre.getText().equals(null) && frmB.txtTelefono.getText().equals("")) {
+                        throw new ProyectoException(2);
+                    } else {
+                        cliente.setIdCliente(Integer.parseInt(frmB.txtIdCliente.getText()));
+                        cliente.setNombreCliente(frmB.txtNombre.getText().trim());
+                        cliente.setNumeroTelefono(Integer.parseInt(frmB.txtTelefono.getText().trim()));
+                        cliente.setDireccion(frmB.txtDireccion.getText().trim());
+                        cliente.setEmail(frmB.txtCorreo.getText().trim());
+
+                    }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
+                }catch (ProyectoException exc){
+                
+                JOptionPane.showMessageDialog(frmA, exc.getMessage(), "Aviso!", INFORMATION_MESSAGE);
                 }
 
                 if (opcion == 1) {
@@ -290,10 +300,17 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
     @Override
     public void keyPressed(KeyEvent e) {
+        
+      
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
+        if (frmB.isActive()) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                System.out.println("dsa");
+            }
+        }
     }
 
     @Override
