@@ -23,7 +23,7 @@ public class DataBase {
     //Atributos
     private final String base = "tiendaelectronica_db";
     private final String user = "root";
-    private final String password = "1234";
+    private final String password = "root";
     private final String url = "jdbc:mysql://localhost/" + base + "?useSSL=false";
 
     private Connection conexion;
@@ -61,7 +61,7 @@ public class DataBase {
             this.sql = this.conexion.createStatement();
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error...No hay conexión con la Base de Datos " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error...No hay conexión con la Base de Datos " + ex.getMessage()+" compruebe la clave y el usuario de la BD");
             return false;
         }
     }
