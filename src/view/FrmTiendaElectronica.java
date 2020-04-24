@@ -154,7 +154,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         mniEquipos.setText("Equipos");
         mnuInicio.add(mniEquipos);
 
-        mniEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        mniEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         mniEmpleados.setText("Empleados");
         mnuInicio.add(mniEmpleados);
 
