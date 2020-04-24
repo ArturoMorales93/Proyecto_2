@@ -97,6 +97,11 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
     //Metodos
     public void limpiarFrmB() {
+
+        if (opcion == 1) {
+            frmOrdenTrabajoB.txtIdOrden.setText(null);
+            frmOrdenTrabajoB.txtIdOrden.requestFocus();
+        }
         frmOrdenTrabajoB.txtCliente.setText(null);
         frmOrdenTrabajoB.txtNombreCliente.setText(null);
         frmOrdenTrabajoB.txtEmpleado.setText(null);
@@ -104,7 +109,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
         frmOrdenTrabajoB.txtEquipo.setText(null);
         frmOrdenTrabajoB.txtMarca.setText(null);
         frmOrdenTrabajoB.txtTotal.setText(null);
-        frmOrdenTrabajoB.btnBuscarCliente.requestFocus();
+
     }
 
     @Override
@@ -205,9 +210,10 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
                         opcion = 2;
                         frmOrdenTrabajoB.setTitle("Actualización de OrdenTrabajo");
+                        frmOrdenTrabajoB.txtIdOrden.setEnabled(false);
                         int fila = frmOrdenTrabajoA.tblTabla.getSelectedRow();
                         ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString()));
-
+                        frmOrdenTrabajoB.txtIdOrden.setText((frmOrdenTrabajoA.tblTabla.getValueAt(fila, 0).toString()));
                         frmOrdenTrabajoB.txtCliente.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 1).toString());
                         frmOrdenTrabajoB.txtEmpleado.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 2).toString());
                         frmOrdenTrabajoB.txtEquipo.setText(frmOrdenTrabajoA.tblTabla.getValueAt(fila, 3).toString());
@@ -248,6 +254,7 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
                 case "Guardar":
                     try {
+                    ordenTrabajo.setIdOrdenTrabajo(Integer.parseInt(frmOrdenTrabajoB.txtIdOrden.getText().trim()));
                     ordenTrabajo.setIdCliente(Integer.parseInt(frmOrdenTrabajoB.txtCliente.getText().trim()));
                     ordenTrabajo.setIdEmpleado(frmOrdenTrabajoB.txtEmpleado.getText().trim());
                     ordenTrabajo.setIdEquipo(Integer.parseInt(frmOrdenTrabajoB.txtEquipo.getText().trim()));
