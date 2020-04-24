@@ -111,7 +111,7 @@ public class EmpleadoModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from empleado where idEmpleado like '%" + texto + "%' or nombreDeEmpleado like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from empleado where idEmpleado like '%"+texto+"%' or nombreDeEmpleado like'%"+texto+"%'");
         rs = db.obtenerRegistro();
 
         return rs;

@@ -80,7 +80,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
 
     //Metodos
     public void limpiarFrmB() {
-        frmB.txtIdEquipo.setText(null);
+        
         frmB.txtIdCliente.setText(null);
         frmB.txtDescripcion.setText(null);
         frmB.txtIdEquipo.requestFocus();
@@ -148,6 +148,9 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
             }
         };
 
+        frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+        frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
+        frmA.tblTabla.requestFocus();
         ResultSet rs = equiModel.filtrarEquipo(frmA.txtBuscar.getText().trim());
 
         try {
@@ -155,8 +158,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
             if (rs.isFirst()) {
                 do {
                     equipo = new Equipo(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
-                    Object newRow[] = {equipo.getIdEquipo(), equipo.getDescripcion(), equipo.getMarca(), equipo.getIdCliente()};
-                    modelo.addRow(newRow);
+                    Object newRow[] = {equipo.getIdEquipo(), equipo.getDescripcion(), equipo.getMarca(), equipo.getIdCliente(), equipo.getNombreCliente()};
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
