@@ -72,10 +72,14 @@ public class MainController implements ActionListener {
         this.winTiendaElectronica.btnOrdenTrabajo.addActionListener(this);
         this.winTiendaElectronica.btnMantenimiento.addActionListener(this);
 
-        this.winTiendaElectronica.mnuArchivo.addActionListener(this);
-        this.winTiendaElectronica.mnuInicio.addActionListener(this);
         this.winTiendaElectronica.mniAyuda.addActionListener(this);
         this.winTiendaElectronica.mniSalir.addActionListener(this);
+        this.winTiendaElectronica.mniClientes.addActionListener(this);
+        this.winTiendaElectronica.mniEquipos.addActionListener(this);
+        this.winTiendaElectronica.mniEmpleados.addActionListener(this);
+        this.winTiendaElectronica.mniOrdenTrabajo.addActionListener(this);
+        this.winTiendaElectronica.mniMantenimiento.addActionListener(this);
+        this.winTiendaElectronica.mniFacturacion.addActionListener(this);
 
         //JavaBeans
         Equipo equipo = new Equipo();

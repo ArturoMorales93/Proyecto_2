@@ -7,7 +7,6 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -46,6 +45,12 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         mniAyuda = new javax.swing.JMenuItem();
         mniSalir = new javax.swing.JMenuItem();
         mnuInicio = new javax.swing.JMenu();
+        mniClientes = new javax.swing.JMenuItem();
+        mniEquipos = new javax.swing.JMenuItem();
+        mniEmpleados = new javax.swing.JMenuItem();
+        mniOrdenTrabajo = new javax.swing.JMenuItem();
+        mniMantenimiento = new javax.swing.JMenuItem();
+        mniFacturacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tienda Electrónica");
@@ -140,6 +145,31 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         jMenuBar1.add(mnuArchivo);
 
         mnuInicio.setText("Inicio");
+
+        mniClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        mniClientes.setText("Clientes");
+        mnuInicio.add(mniClientes);
+
+        mniEquipos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mniEquipos.setText("Equipos");
+        mnuInicio.add(mniEquipos);
+
+        mniEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        mniEmpleados.setText("Empleados");
+        mnuInicio.add(mniEmpleados);
+
+        mniOrdenTrabajo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        mniOrdenTrabajo.setText("Orden de trabajo");
+        mnuInicio.add(mniOrdenTrabajo);
+
+        mniMantenimiento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        mniMantenimiento.setText("Mantenimiento");
+        mnuInicio.add(mniMantenimiento);
+
+        mniFacturacion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        mniFacturacion.setText("Facturación");
+        mnuInicio.add(mniFacturacion);
+
         jMenuBar1.add(mnuInicio);
 
         setJMenuBar(jMenuBar1);
@@ -204,6 +234,12 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JMenuItem mniAyuda;
+    public javax.swing.JMenuItem mniClientes;
+    public javax.swing.JMenuItem mniEmpleados;
+    public javax.swing.JMenuItem mniEquipos;
+    public javax.swing.JMenuItem mniFacturacion;
+    public javax.swing.JMenuItem mniMantenimiento;
+    public javax.swing.JMenuItem mniOrdenTrabajo;
     public javax.swing.JMenuItem mniSalir;
     public javax.swing.JMenu mnuArchivo;
     public javax.swing.JMenu mnuInicio;
