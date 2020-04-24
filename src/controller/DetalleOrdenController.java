@@ -80,10 +80,13 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
     //Metodos
     public void limpiarFrmB() {
-        frmDetalleOrdenB.txtMantenimiento.setText(null);
-        frmDetalleOrdenB.txaObservaciones.setText(null);
-        frmDetalleOrdenB.txtPrecio.setText(null);
-        frmDetalleOrdenB.btnBuscarMantenimiento.requestFocus();
+        if (opcion==1) {
+            frmDetalleOrdenB.txtIdOrden.setText(null);
+            frmDetalleOrdenB.txtMantenimiento.setText(null);
+            frmDetalleOrdenB.txaObservaciones.setText(null);
+            frmDetalleOrdenB.txtPrecio.setText(null);
+            frmDetalleOrdenB.btnBuscarMantenimiento.requestFocus();
+        }
     }
 
     @Override
@@ -184,9 +187,10 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
                         opcion = 2;
                         frmDetalleOrdenB.setTitle("Actualización de DetalleOrden");
+                        frmDetalleOrdenB.txtIdOrden.setEnabled(false);
                         int fila = frmDetalleOrdenA.tblTabla.getSelectedRow();
                         detalleOrden.setIdDetalleOrden(Integer.parseInt(frmDetalleOrdenA.tblTabla.getValueAt(fila, 0).toString()));
-
+                        frmDetalleOrdenB.txtIdOrden.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 0).toString());
                         frmDetalleOrdenB.txtOrden.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 1).toString());
                         frmDetalleOrdenB.txtMantenimiento.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 2).toString());
                         frmDetalleOrdenB.txtPrecio.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 3).toString());
@@ -228,6 +232,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
                 case "Guardar":
                     try {
+                    detalleOrden.setIdDetalleOrden(Integer.parseInt(frmDetalleOrdenB.txtIdOrden.getText().trim()));
                     detalleOrden.setIdOrdenTrabajo(Integer.parseInt(frmDetalleOrdenB.txtOrden.getText().trim()));
                     detalleOrden.setIdMantenimiento((frmDetalleOrdenB.txtMantenimiento.getText().trim()));
                     detalleOrden.setPrecio(Integer.parseInt(frmDetalleOrdenB.txtPrecio.getText().trim()));

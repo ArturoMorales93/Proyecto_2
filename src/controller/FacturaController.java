@@ -18,6 +18,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javaBeans.DetalleFactura;
 import javaBeans.Factura;
 import javax.swing.JOptionPane;
@@ -95,12 +97,13 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
     //Metodos
     public void limpiarFrmB() {
+        frmFacturaB.txtIdFactura.setText(null);
         frmFacturaB.txtCliente.setText(null);
         frmFacturaB.txtNombreCliente.setText(null);
         frmFacturaB.txtEmpleado.setText(null);
         frmFacturaB.txtNombreEmpleado.setText(null);
         frmFacturaB.txtOrdenTrabajo.setText(null);
-        frmFacturaB.txtFecha.setText("aaaa/mm/dd");
+        frmFacturaB.txtFecha.setText(null);
         frmFacturaB.txtImpuesto.setText(null);
         frmFacturaB.txtSubTotal.setText(null);
         frmFacturaB.txtTotal.setText(null);
@@ -227,8 +230,13 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                         frmFacturaB.setTitle("Actualización de Factura");
                         int fila = frmFacturaA.tblTabla.getSelectedRow();
                         factura.setIdFactura(Integer.parseInt(frmFacturaA.tblTabla.getValueAt(fila, 0).toString()));
-
-                        frmFacturaB.txtFecha.setText(frmFacturaA.tblTabla.getValueAt(fila, 1).toString());
+                        frmFacturaB.txtIdFactura.setText(String.valueOf(frmFacturaA.tblTabla.getValueAt(fila, 0)));
+                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
+                        String FechaString = frmFacturaA.tblTabla.getValueAt(fila, 1).toString();
+                        //string to date
+                        LocalDate localDate = LocalDate.parse(FechaString, dateTimeFormatter);
+                        frmFacturaB.txtFecha.setDate(localDate);
+                        
                         frmFacturaB.txtOrdenTrabajo.setText(frmFacturaA.tblTabla.getValueAt(fila, 2).toString());
                         frmFacturaB.txtEmpleado.setText(frmFacturaA.tblTabla.getValueAt(fila, 3).toString());
                         frmFacturaB.txtCliente.setText(frmFacturaA.tblTabla.getValueAt(fila, 4).toString());
@@ -271,7 +279,11 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
                 case "Guardar":
                     try {
-                    factura.setFecha(frmFacturaB.txtFecha.getText().trim());
+                    LocalDate localDate = frmFacturaB.txtFecha.getDate();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    String fecha = localDate.format(formatter);
+                    factura.setIdFactura(Integer.parseInt(frmFacturaB.txtIdFactura.getText().trim()));
+                    factura.setFecha(fecha);
                     factura.setIdOrden(Integer.parseInt(frmFacturaB.txtOrdenTrabajo.getText().trim()));
                     factura.setIdEmpleado(frmFacturaB.txtEmpleado.getText().trim());
                     factura.setIdCliente(Integer.parseInt(frmFacturaB.txtCliente.getText().trim()));
