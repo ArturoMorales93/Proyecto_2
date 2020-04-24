@@ -69,15 +69,19 @@ public class MantenimientoController implements WindowListener, ActionListener, 
 
     //Metodos
     public void limpiarFrmB() {
-        frmB.txtCodigoMantenimiento.setText(null);
+        if (opcion == 1) {
+            frmB.txtCodigoMantenimiento.setText(null);
+            frmB.txtCodigoMantenimiento.requestFocus();
+        } else {
+            frmB.txaDescripcion.requestFocus();
+        }
         frmB.txaDescripcion.setText(null);
         frmB.txtPrecio.setText(null);
-        frmB.txtCodigoMantenimiento.requestFocus();
     }
 
     @Override
     public void focusGained(FocusEvent e) {
-        if (frmA.txtBuscar.getText().equals("Filtrar por ID o Nombre")) {
+        if (frmA.txtBuscar.getText().equals("Filtrar por ID o Descripción")) {
             frmA.txtBuscar.setText(null);
             frmA.txtBuscar.setForeground(Color.BLACK);
         }
@@ -86,7 +90,7 @@ public class MantenimientoController implements WindowListener, ActionListener, 
     @Override
     public void focusLost(FocusEvent e) {
         if (frmA.txtBuscar.getText().equals("")) {
-            frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+            frmA.txtBuscar.setText("Filtrar por ID o Descripción");
             frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         }
     }
@@ -101,7 +105,7 @@ public class MantenimientoController implements WindowListener, ActionListener, 
             }
         };
 
-        frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+        frmA.txtBuscar.setText("Filtrar por ID o Descripción");
         frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmA.tblTabla.requestFocus();
         ResultSet rs = manModel.mostrarMantenimiento();
@@ -125,7 +129,7 @@ public class MantenimientoController implements WindowListener, ActionListener, 
 
     @Override
     public void keyReleased(KeyEvent e) {
-       String columnas[] = {"ID Manteniento", "Descripcción", "Precio"};
+        String columnas[] = {"ID Manteniento", "Descripcción", "Precio"};
         modelo = new DefaultTableModel(null, columnas) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -141,7 +145,6 @@ public class MantenimientoController implements WindowListener, ActionListener, 
                 do {
                     mantenimiento = new Mantenimiento(rs.getString(1), rs.getString(2), rs.getInt(3));
                     Object newRow[] = {mantenimiento.getIdMantenimiento(), mantenimiento.getDescripcion(), mantenimiento.getPrecio()};
-                    modelo.addRow(newRow);
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -216,7 +219,7 @@ public class MantenimientoController implements WindowListener, ActionListener, 
                     mantenimiento.setIdMantenimiento(frmB.txtCodigoMantenimiento.getText().trim());
                     mantenimiento.setDescripcion(frmB.txaDescripcion.getText().trim());
                     mantenimiento.setPrecio(Integer.parseInt(frmB.txtPrecio.getText().trim()));
-                   
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
                 }

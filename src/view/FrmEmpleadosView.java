@@ -53,12 +53,15 @@ public class FrmEmpleadosView extends javax.swing.JDialog {
         txtBuscar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtBuscar.setText("Filtrar por ID o Nombre");
 
+        btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         btnNuevo.setText("Nuevo");
         btnNuevo.setPreferredSize(new java.awt.Dimension(124, 54));
 
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setPreferredSize(new java.awt.Dimension(124, 54));
 
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setPreferredSize(new java.awt.Dimension(124, 54));
 

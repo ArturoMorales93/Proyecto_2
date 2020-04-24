@@ -176,14 +176,17 @@ public class FrmNuevoOrdenTrabajoView extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
 
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnGuardar);
 
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clean.jpg"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnLimpiar);
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.jpg"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnCancelar);

@@ -113,7 +113,7 @@ public class EquipoModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from equipo where idEquipos like '%" + texto + "%' or marca like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from equipos where idEquipos like '%" + texto + "%' or marca like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;

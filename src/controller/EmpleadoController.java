@@ -133,7 +133,7 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
 
                     if (frmB.cmbTipoEmpleado.getSelectedIndex() == 0) {
                         throw new ProyectoException(1);
-                     
+
                     }
 
                     empleado.setIdEmpleado(frmB.txtIdUsuario.getText());
@@ -178,11 +178,16 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
     }
 
     public void limpiarFrmB() {
-        frmB.txtIdUsuario.setText(null);
+        if (opcion == 1) {
+            frmB.txtIdUsuario.setText(null);
+            frmB.txtIdUsuario.requestFocus();
+        } else {
+            frmB.txtNombre.requestFocus();
+        }
         frmB.txtNombre.setText(null);
         frmB.cmbTipoEmpleado.setSelectedIndex(0);
         frmB.txtCodigo.setText(null);
-        frmB.txtNombre.requestFocus();
+
     }
 
     @Override

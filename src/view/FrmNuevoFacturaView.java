@@ -52,9 +52,9 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
         txtSubTotal = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        btnGuardar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -216,17 +216,20 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 25, 5));
 
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
+        jPanel2.add(btnGuardar);
+
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clean.jpg"))); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnLimpiar);
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancel.jpg"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnCancelar);
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
-        jPanel2.add(btnGuardar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
