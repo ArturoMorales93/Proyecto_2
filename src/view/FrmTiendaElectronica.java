@@ -41,32 +41,44 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         btnMantenimiento = new javax.swing.JButton();
         btnOrdenTrabajo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        mnuArchivo = new javax.swing.JMenu();
+        mniAyuda = new javax.swing.JMenuItem();
+        mniSalir = new javax.swing.JMenuItem();
+        mnuInicio = new javax.swing.JMenu();
+        mniClientes = new javax.swing.JMenuItem();
+        mniEquipos = new javax.swing.JMenuItem();
+        mniEmpleados = new javax.swing.JMenuItem();
+        mniOrdenTrabajo = new javax.swing.JMenuItem();
+        mniMantenimiento = new javax.swing.JMenuItem();
+        mniFacturacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tienda Electrónica");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setIconImage(getIconImage());
+        setIconImages(null);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Bienvenido");
 
         btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
         btnClientes.setText("Clientes");
         btnClientes.setPreferredSize(new java.awt.Dimension(150, 70));
 
         btnEquipos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEquipos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/equipos.png"))); // NOI18N
         btnEquipos.setText("Equipos");
         btnEquipos.setPreferredSize(new java.awt.Dimension(150, 70));
 
         btnEmpleados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/empleados.png"))); // NOI18N
         btnEmpleados.setText("Empleados");
         btnEmpleados.setPreferredSize(new java.awt.Dimension(150, 70));
 
         btnFacturacion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnFacturacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/facturacion.png"))); // NOI18N
         btnFacturacion.setText("Facturación");
         btnFacturacion.setPreferredSize(new java.awt.Dimension(150, 70));
 
@@ -76,6 +88,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
         btnMantenimiento.setPreferredSize(new java.awt.Dimension(150, 70));
 
         btnOrdenTrabajo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnOrdenTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ordenTrabajo.png"))); // NOI18N
         btnOrdenTrabajo.setText("Orden de trabajo");
         btnOrdenTrabajo.setPreferredSize(new java.awt.Dimension(150, 70));
 
@@ -89,7 +102,7 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addComponent(btnClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                             .addComponent(btnOrdenTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -119,18 +132,45 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jMenu2.setText("Archivo");
+        mnuArchivo.setText("Archivo");
 
-        jMenuItem1.setText("Ayuda");
-        jMenu2.add(jMenuItem1);
+        mniAyuda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        mniAyuda.setText("Ayuda");
+        mnuArchivo.add(mniAyuda);
 
-        jMenuItem2.setText("Salir");
-        jMenu2.add(jMenuItem2);
+        mniSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        mniSalir.setText("Salir");
+        mnuArchivo.add(mniSalir);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(mnuArchivo);
 
-        jMenu3.setText("Inicio");
-        jMenuBar1.add(jMenu3);
+        mnuInicio.setText("Inicio");
+
+        mniClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        mniClientes.setText("Clientes");
+        mnuInicio.add(mniClientes);
+
+        mniEquipos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        mniEquipos.setText("Equipos");
+        mnuInicio.add(mniEquipos);
+
+        mniEmpleados.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        mniEmpleados.setText("Empleados");
+        mnuInicio.add(mniEmpleados);
+
+        mniOrdenTrabajo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        mniOrdenTrabajo.setText("Orden de trabajo");
+        mnuInicio.add(mniOrdenTrabajo);
+
+        mniMantenimiento.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
+        mniMantenimiento.setText("Mantenimiento");
+        mnuInicio.add(mniMantenimiento);
+
+        mniFacturacion.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        mniFacturacion.setText("Facturación");
+        mnuInicio.add(mniFacturacion);
+
+        jMenuBar1.add(mnuInicio);
 
         setJMenuBar(jMenuBar1);
 
@@ -191,12 +231,18 @@ public class FrmTiendaElectronica extends javax.swing.JFrame {
     public javax.swing.JButton btnMantenimiento;
     public javax.swing.JButton btnOrdenTrabajo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JMenuItem mniAyuda;
+    public javax.swing.JMenuItem mniClientes;
+    public javax.swing.JMenuItem mniEmpleados;
+    public javax.swing.JMenuItem mniEquipos;
+    public javax.swing.JMenuItem mniFacturacion;
+    public javax.swing.JMenuItem mniMantenimiento;
+    public javax.swing.JMenuItem mniOrdenTrabajo;
+    public javax.swing.JMenuItem mniSalir;
+    public javax.swing.JMenu mnuArchivo;
+    public javax.swing.JMenu mnuInicio;
     // End of variables declaration//GEN-END:variables
 
     private class FondoPanel extends JPanel {

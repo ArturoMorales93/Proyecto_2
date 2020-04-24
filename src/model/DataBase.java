@@ -61,7 +61,7 @@ public class DataBase {
             this.sql = this.conexion.createStatement();
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error...No hay conexión con la Base de Datos " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error...No hay conexión con la Base de Datos " + ex.getMessage()+" compruebe la clave y el usuario de la BD");
             return false;
         }
     }

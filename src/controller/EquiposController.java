@@ -80,10 +80,16 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
 
     //Metodos
     public void limpiarFrmB() {
-        
+
+        if (opcion == 1) {
+            frmB.txtIdEquipo.setText(null);
+            frmB.txtIdEquipo.requestFocus();
+        } else {
+            frmB.txtDescripcion.requestFocus();
+        }
+
         frmB.txtIdCliente.setText(null);
         frmB.txtDescripcion.setText(null);
-        frmB.txtIdEquipo.requestFocus();
         frmB.txtMarca.setText(null);
         frmB.txtNombreCliente.setText(null);
         frmB.txtNombreCliente.setText(null);
@@ -92,7 +98,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
 
     @Override
     public void focusGained(FocusEvent e) {
-        if (frmA.txtBuscar.getText().equals("Filtrar por ID o Nombre")) {
+        if (frmA.txtBuscar.getText().equals("Filtrar por ID o Marca")) {
             frmA.txtBuscar.setText(null);
             frmA.txtBuscar.setForeground(Color.BLACK);
         }
@@ -101,7 +107,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
     @Override
     public void focusLost(FocusEvent e) {
         if (frmA.txtBuscar.getText().equals("")) {
-            frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+            frmA.txtBuscar.setText("Filtrar por ID o Marca");
             frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         }
     }
@@ -116,7 +122,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
             }
         };
 
-        frmA.txtBuscar.setText("Filtrar por ID o Nombre");
+        frmA.txtBuscar.setText("Filtrar por ID o Marca");
         frmA.txtBuscar.setForeground(Color.LIGHT_GRAY);
         frmA.tblTabla.requestFocus();
         ResultSet rs = equiModel.mostrarEquipo();
@@ -270,7 +276,7 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
                     break;
 
                 case "...":
-                   ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
+                    ClienteController clienteController = new ClienteController(cliente, clienteModel, frmClientesA, frmClientesB);
 
                     frmClientesA.lblInfo.setVisible(true);
                     frmClientesA.btnNuevo.setVisible(true);
@@ -342,12 +348,16 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        frmA.lblTexto.setVisible(true);
+        if (e.getSource() == frmA.lblInfo) {
+            frmA.lblTexto.setVisible(true);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        frmA.lblTexto.setVisible(false);
+        if (e.getSource() == frmA.lblInfo) {
+            frmA.lblTexto.setVisible(false);
+        }
     }
 
 }

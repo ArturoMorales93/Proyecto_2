@@ -115,7 +115,7 @@ public class DetalleOrdenModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from detalleOrden where idDetalleOrden like '%" + texto + "%' or nombreCliente like '%" + texto + "%'");
+        db.ejecutarSqlSelect("Select * from detalleOrden where idDetalleOrden like '%" + texto + "%'");
         rs = db.obtenerRegistro();
 
         return rs;
