@@ -97,7 +97,9 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
     //Metodos
     public void limpiarFrmB() {
-        frmFacturaB.txtIdFactura.setText(null);
+        if (opcion == 1) {
+            frmFacturaB.txtIdFactura.setText(null);
+        }
         frmFacturaB.txtCliente.setText(null);
         frmFacturaB.txtNombreCliente.setText(null);
         frmFacturaB.txtEmpleado.setText(null);
@@ -105,8 +107,6 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         frmFacturaB.txtOrdenTrabajo.setText(null);
         frmFacturaB.txtFecha.setText(null);
         frmFacturaB.txtImpuesto.setText(null);
-        frmFacturaB.txtSubTotal.setText(null);
-        frmFacturaB.txtTotal.setText(null);
         frmFacturaB.btnBuscarOrden.requestFocus();
     }
 
@@ -159,15 +159,18 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         frmFacturaA.lblTexto.setVisible(false);
         frmFacturaA.tblTabla.requestFocus();
         ResultSet rs = facturaModel.mostrarFactura();
+        float total;
 
         try {
 
             if (rs.isFirst()) {
                 do {
+                    total = 0;
+                    total = rs.getInt(7)+(rs.getInt(7)*((float) rs.getInt(6)/100));
                     factura = new Factura(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6),
                             rs.getInt(7), rs.getInt(8));
                     Object newRow[] = {factura.getIdFactura(), factura.getFecha(), factura.getIdOrden(), factura.getIdEmpleado(),
-                        factura.getIdCliente(), factura.getImpuesto(), factura.getSubTotal(), factura.getTotal()};
+                        factura.getIdCliente(), factura.getImpuesto(), factura.getSubTotal(), total};
                     modelo.addRow(newRow);
                 } while (rs.next());
             }
@@ -219,6 +222,9 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                 case "Nuevo":
                     opcion = 1;
                     frmFacturaB.setTitle("Registro de Factura");
+                    frmFacturaB.txtIdFactura.setEnabled(true);
+                    frmFacturaB.txtSubTotal.setText("0");
+                    frmFacturaB.txtTotal.setText("0");
                     limpiarFrmB();
                     frmFacturaB.setVisible(true);
                     break;
@@ -228,6 +234,7 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
                         opcion = 2;
                         frmFacturaB.setTitle("Actualización de Factura");
+                        frmFacturaB.txtIdFactura.setEnabled(false);
                         int fila = frmFacturaA.tblTabla.getSelectedRow();
                         factura.setIdFactura(Integer.parseInt(frmFacturaA.tblTabla.getValueAt(fila, 0).toString()));
                         frmFacturaB.txtIdFactura.setText(String.valueOf(frmFacturaA.tblTabla.getValueAt(fila, 0)));
@@ -236,7 +243,7 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                         //string to date
                         LocalDate localDate = LocalDate.parse(FechaString, dateTimeFormatter);
                         frmFacturaB.txtFecha.setDate(localDate);
-                        
+
                         frmFacturaB.txtOrdenTrabajo.setText(frmFacturaA.tblTabla.getValueAt(fila, 2).toString());
                         frmFacturaB.txtEmpleado.setText(frmFacturaA.tblTabla.getValueAt(fila, 3).toString());
                         frmFacturaB.txtCliente.setText(frmFacturaA.tblTabla.getValueAt(fila, 4).toString());
@@ -260,7 +267,6 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
 
                         if (resp == 0) {
                             if (facturaModel.eliminarFactura(factura.getIdFactura())) {
-                                JOptionPane.showMessageDialog(frmFacturaA, "Factura eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmFacturaA, "Error al eliminar");
                             }
@@ -292,6 +298,8 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                     factura.setTotal(Integer.parseInt(frmFacturaB.txtTotal.getText().trim()));
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmFacturaB, "Error de tipo de datos");
+                } catch (NullPointerException ex) {
+                    JOptionPane.showMessageDialog(frmFacturaB, "Ingrese la fecha");
                 }
 
                 if (opcion == 1) {

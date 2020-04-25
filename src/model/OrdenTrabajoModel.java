@@ -29,7 +29,7 @@ public class OrdenTrabajoModel {
             cst.setString(3, ordenTrabajo.getIdEmpleado());
             cst.setInt(4, ordenTrabajo.getIdEquipo());
             cst.setInt(5, ordenTrabajo.getTotal());
-            
+
             //Parametro de salida del procedimiento almacenado
             cst.registerOutParameter(6, java.sql.Types.BOOLEAN);
 
@@ -104,12 +104,14 @@ public class OrdenTrabajoModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from ordenDeTrabajo");
+        db.ejecutarSqlSelect("SELECT oc.idOrden, idCliente, idEmpleado, idEquipo, \n"
+                + "(SELECT sum(precio) FROM detalleOrden WHERE idOrden = oc.idOrden) AS total \n"
+                + "FROM ordendetrabajo AS oc");
         rs = db.obtenerRegistro();
 
         return rs;
     }
-    
+
     public ResultSet filtrarOrdenTrabajo(String texto) {
 
         DataBase db = new DataBase();

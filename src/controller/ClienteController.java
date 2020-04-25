@@ -208,7 +208,6 @@ public class ClienteController implements WindowListener, ActionListener, KeyLis
 
                         if (resp == 0) {
                             if (clienteModel.eliminarCliente(cliente.getIdCliente())) {
-                                JOptionPane.showMessageDialog(frmA, "Cliente eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }

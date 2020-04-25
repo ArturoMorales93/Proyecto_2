@@ -32,7 +32,7 @@ public class FacturaModel {
             cst.setInt(6, factura.getImpuesto());
             cst.setInt(7, factura.getSubTotal());
             cst.setInt(8, factura.getTotal());
-            
+
             //Parametro de salida del procedimiento almacenado
             cst.registerOutParameter(9, java.sql.Types.BOOLEAN);
 
@@ -110,7 +110,9 @@ public class FacturaModel {
         DataBase db = new DataBase();
         ResultSet rs;
 
-        db.ejecutarSqlSelect("Select * from factura");
+        db.ejecutarSqlSelect("SELECT f.idFactura, fecha, idOrden, idEmpleado, idCliente, impuesto, \n"
+                + "(SELECT SUM(precio) FROM detalleFactura WHERE idFactura = f.IdFactura) AS subtotal, total \n"
+                + "FROM factura AS f");
         rs = db.obtenerRegistro();
 
         return rs;

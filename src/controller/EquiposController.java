@@ -219,7 +219,6 @@ public class EquiposController implements ActionListener, KeyListener, WindowLis
 
                         if (resp == 0) {
                             if (equiModel.eliminarEquipo(equipo.getIdEquipo())) {
-                                JOptionPane.showMessageDialog(frmA, "Equipo eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }

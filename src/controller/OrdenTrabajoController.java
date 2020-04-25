@@ -100,6 +100,8 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
         if (opcion == 1) {
             frmOrdenTrabajoB.txtIdOrden.setText(null);
+            frmOrdenTrabajoB.btnBuscarCliente.requestFocus();
+        } else {
             frmOrdenTrabajoB.txtIdOrden.requestFocus();
         }
         frmOrdenTrabajoB.txtCliente.setText(null);
@@ -108,7 +110,6 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
         frmOrdenTrabajoB.txtNombreEmpleado.setText(null);
         frmOrdenTrabajoB.txtEquipo.setText(null);
         frmOrdenTrabajoB.txtMarca.setText(null);
-        frmOrdenTrabajoB.txtTotal.setText(null);
 
     }
 
@@ -201,6 +202,8 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
                 case "Nuevo":
                     opcion = 1;
                     frmOrdenTrabajoB.setTitle("Registro de OrdenTrabajo");
+                    frmOrdenTrabajoB.txtIdOrden.setEnabled(true);
+                    frmOrdenTrabajoB.txtTotal.setText("0");
                     limpiarFrmB();
                     frmOrdenTrabajoB.setVisible(true);
                     break;
@@ -235,7 +238,6 @@ public class OrdenTrabajoController implements WindowListener, ActionListener, K
 
                         if (resp == 0) {
                             if (ordenTrabajoModel.eliminarOrdenTrabajo(ordenTrabajo.getIdOrdenTrabajo())) {
-                                JOptionPane.showMessageDialog(frmOrdenTrabajoA, "OrdenTrabajo eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmOrdenTrabajoA, "Error al eliminar");
                             }

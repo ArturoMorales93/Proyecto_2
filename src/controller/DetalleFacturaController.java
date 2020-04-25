@@ -73,6 +73,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
         //Componentes del FrameB
         this.frmDetalleFacturaB.setLocationRelativeTo(null);
+        this.frmDetalleFacturaB.txtCantidad.addKeyListener(this);
         this.frmDetalleFacturaB.btnGuardar.addActionListener(this);
         this.frmDetalleFacturaB.btnLimpiar.addActionListener(this);
         this.frmDetalleFacturaB.btnCancelar.addActionListener(this);
@@ -123,7 +124,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
             if (rs.isFirst()) {
                 do {
-                    detalleFactura = new DetalleFactura(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
+                    detalleFactura = new DetalleFactura(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
                     Object newRow[] = {detalleFactura.getIdDetalleFactura(), detalleFactura.getIdFactura(), detalleFactura.getCantidad(),
                         detalleFactura.getIdMantenimiento(), detalleFactura.getPrecio(), detalleFactura.getSubTotal()};
                     modelo.addRow(newRow);
@@ -139,31 +140,48 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
     @Override
     public void keyReleased(KeyEvent e) {
-        String columnas[] = {"ID Detalle", "ID Factura", "Cantidad", "ID Mantenimiento", "Precio", "Subtotal"};
-        modelo = new DefaultTableModel(null, columnas) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
+        if (frmDetalleFacturaA.isActive()) {
+            String columnas[] = {"ID Detalle", "ID Factura", "Cantidad", "ID Mantenimiento", "Precio", "Subtotal"};
+            modelo = new DefaultTableModel(null, columnas) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+            
+            ResultSet rs = detalleFacturaModel.filtrarDetalleFactura(frmDetalleFacturaA.txtBuscar.getText().trim());
+            
+            try {
+                
+                if (rs.isFirst()) {
+                    do {
+                        detalleFactura = new DetalleFactura(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                        Object newRow[] = {detalleFactura.getIdDetalleFactura(), detalleFactura.getIdFactura(), detalleFactura.getCantidad(),
+                            detalleFactura.getIdMantenimiento(), detalleFactura.getPrecio(), detalleFactura.getSubTotal()};
+                        modelo.addRow(newRow);
+                    } while (rs.next());
+                }
+                frmDetalleFacturaA.tblTabla.setModel(modelo);
+                frmDetalleFacturaA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
+                
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(frmDetalleFacturaA, ex.getMessage());
             }
-        };
-
-        ResultSet rs = detalleFacturaModel.filtrarDetalleFactura(frmDetalleFacturaA.txtBuscar.getText().trim());
-
-        try {
-
-            if (rs.isFirst()) {
-                do {
-                    detalleFactura = new DetalleFactura(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6));
-                    Object newRow[] = {detalleFactura.getIdDetalleFactura(), detalleFactura.getIdFactura(), detalleFactura.getCantidad(),
-                        detalleFactura.getIdMantenimiento(), detalleFactura.getPrecio(), detalleFactura.getSubTotal()};
-                    modelo.addRow(newRow);
-                } while (rs.next());
+        }
+        
+        
+        if (frmDetalleFacturaB.isActive()) {
+            try {
+                
+                if (frmDetalleFacturaB.txtCantidad.getText().length() > 0 && !frmDetalleFacturaB.txtCantidad.getText().equals("0")) {
+                    frmDetalleFacturaB.txtPrecio.setText("" + (Integer.parseInt(frmDetalleFacturaB.txtSubTotal.getText()) * Integer.parseInt(frmDetalleFacturaB.txtCantidad.getText())));
+                } else {
+                    frmDetalleFacturaB.txtPrecio.setText(null);
+                }
+                
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(frmDetalleFacturaB, "La cantidad debe ser expresada en números");
             }
-            frmDetalleFacturaA.tblTabla.setModel(modelo);
-            frmDetalleFacturaA.lblCantidadRegistros.setText("Cantidad de Registros: " + modelo.getRowCount());
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(frmDetalleFacturaA, ex.getMessage());
         }
     }
 
@@ -212,7 +230,6 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
                         if (resp == 0) {
                             if (detalleFacturaModel.eliminarDetalleFactura(detalleFactura.getIdDetalleFactura())) {
-                                JOptionPane.showMessageDialog(frmDetalleFacturaA, "DetalleFactura eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmDetalleFacturaA, "Error al eliminar");
                             }
@@ -233,7 +250,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
                     try {
                     detalleFactura.setIdFactura(Integer.parseInt(frmDetalleFacturaB.txtFactura.getText().trim()));
                     detalleFactura.setCantidad(Integer.parseInt(frmDetalleFacturaB.txtCantidad.getText().trim()));
-                    detalleFactura.setIdMantenimiento(Integer.parseInt(frmDetalleFacturaB.txtMantenimiento.getText().trim()));
+                    detalleFactura.setIdMantenimiento(frmDetalleFacturaB.txtMantenimiento.getText().trim());
                     detalleFactura.setPrecio(Integer.parseInt(frmDetalleFacturaB.txtPrecio.getText().trim()));
                     detalleFactura.setSubTotal(Integer.parseInt(frmDetalleFacturaB.txtSubTotal.getText().trim()));
                 } catch (NumberFormatException ex) {
@@ -290,6 +307,7 @@ public class DetalleFacturaController implements WindowListener, ActionListener,
 
                 int fila = frmMantenimientoA.tblTabla.getSelectedRow();
                 frmDetalleFacturaB.txtMantenimiento.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 0).toString());
+                frmDetalleFacturaB.txtSubTotal.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 2).toString());
                 frmMantenimientoA.dispose();
 
             }

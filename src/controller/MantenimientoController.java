@@ -197,7 +197,6 @@ public class MantenimientoController implements WindowListener, ActionListener, 
 
                         if (resp == 0) {
                             if (manModel.eliminarMantenimiento(mantenimiento.getIdMantenimiento())) {
-                                JOptionPane.showMessageDialog(frmA, "Mantenimiento eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }

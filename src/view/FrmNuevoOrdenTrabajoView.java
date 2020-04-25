@@ -91,10 +91,13 @@ public class FrmNuevoOrdenTrabajoView extends javax.swing.JDialog {
 
         jLabel10.setText("Total:");
 
+        txtTotal.setEditable(false);
+        txtTotal.setFocusable(false);
+
         txtNombreCliente.setEditable(false);
         txtNombreCliente.setFocusable(false);
 
-        jLabel3.setText("ID Factura");
+        jLabel3.setText("ID Orden");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -187,7 +190,6 @@ public class FrmNuevoOrdenTrabajoView extends javax.swing.JDialog {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnGuardar);
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clean.jpg"))); // NOI18N

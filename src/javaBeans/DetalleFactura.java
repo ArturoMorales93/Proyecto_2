@@ -17,7 +17,7 @@ public class DetalleFactura implements Serializable {
     private int idDetalleFactura;
     private int idFactura;
     private int cantidad;
-    private int idMantenimiento;
+    private String idMantenimiento;
     private int precio;
     private int subTotal;
 
@@ -26,12 +26,12 @@ public class DetalleFactura implements Serializable {
         this.idDetalleFactura = 0;
         this.idFactura = 0;
         this.cantidad = 0;
-        this.idMantenimiento = 0;
+        this.idMantenimiento = null;
         this.precio = 0;
         this.subTotal = 0;
     }
 
-    public DetalleFactura(int idDetalleFactura, int idFactura, int cantidad, int idMantenimiento, int precio, int subTotal) {
+    public DetalleFactura(int idDetalleFactura, int idFactura, int cantidad, String idMantenimiento, int precio, int subTotal) {
         this.idDetalleFactura = idDetalleFactura;
         this.idFactura = idFactura;
         this.cantidad = cantidad;
@@ -65,11 +65,11 @@ public class DetalleFactura implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public int getIdMantenimiento() {
+    public String getIdMantenimiento() {
         return idMantenimiento;
     }
 
-    public void setIdMantenimiento(int idMantenimiento) {
+    public void setIdMantenimiento(String idMantenimiento) {
         this.idMantenimiento = idMantenimiento;
     }
 
