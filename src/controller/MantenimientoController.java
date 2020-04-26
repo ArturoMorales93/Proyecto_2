@@ -211,6 +211,7 @@ public class MantenimientoController implements WindowListener, ActionListener, 
         }
 
         if (frmB.isActive()) { //Botones del FrameB
+            boolean letraFlag = false;
             switch (e.getActionCommand()) {
 
                 case "Guardar":
@@ -221,14 +222,18 @@ public class MantenimientoController implements WindowListener, ActionListener, 
 
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frmB, "Error de tipo de datos");
+                    letraFlag = true;
                 }
 
                 if (opcion == 1) {
-                    if (manModel.insertarMantenimiento(mantenimiento)) {
-                        JOptionPane.showMessageDialog(frmB, "Mantenimiento Registrado");
-                        frmB.dispose();
+                    if (letraFlag == false) {
+                        if (manModel.insertarMantenimiento(mantenimiento)) {
+                            JOptionPane.showMessageDialog(frmB, "Mantenimiento Registrado");
+                            frmB.dispose();
+                        }
                     } else {
                         JOptionPane.showMessageDialog(frmB, "Error al guardar");
+
                     }
                 } else {
                     if (manModel.modificarMantenimiento(mantenimiento)) {

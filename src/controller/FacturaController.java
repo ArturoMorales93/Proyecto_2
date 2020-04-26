@@ -79,7 +79,7 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
         this.frmFacturaA.tblTabla.getTableHeader().setReorderingAllowed(false);
         this.frmFacturaA.tblTabla.addMouseListener(this);
         this.frmFacturaA.btnNuevo.addActionListener(this);
-        this.frmFacturaA.btnEditar.addActionListener(this);
+       // this.frmFacturaA.btnEditar.addActionListener(this);
         this.frmFacturaA.btnEliminar.addActionListener(this);
         this.frmFacturaA.txtBuscar.addKeyListener(this);
         this.frmFacturaA.txtBuscar.addFocusListener(this);
@@ -229,34 +229,34 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                     frmFacturaB.setVisible(true);
                     break;
 
-                case "Editar":
-                    if (frmFacturaA.tblTabla.getSelectedRowCount() == 1) {
-
-                        opcion = 2;
-                        frmFacturaB.setTitle("Actualización de Factura");
-                        frmFacturaB.txtIdFactura.setEnabled(false);
-                        int fila = frmFacturaA.tblTabla.getSelectedRow();
-                        factura.setIdFactura(Integer.parseInt(frmFacturaA.tblTabla.getValueAt(fila, 0).toString()));
-                        frmFacturaB.txtIdFactura.setText(String.valueOf(frmFacturaA.tblTabla.getValueAt(fila, 0)));
-                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
-                        String FechaString = frmFacturaA.tblTabla.getValueAt(fila, 1).toString();
-                        //string to date
-                        LocalDate localDate = LocalDate.parse(FechaString, dateTimeFormatter);
-                        frmFacturaB.txtFecha.setDate(localDate);
-
-                        frmFacturaB.txtOrdenTrabajo.setText(frmFacturaA.tblTabla.getValueAt(fila, 2).toString());
-                        frmFacturaB.txtEmpleado.setText(frmFacturaA.tblTabla.getValueAt(fila, 3).toString());
-                        frmFacturaB.txtCliente.setText(frmFacturaA.tblTabla.getValueAt(fila, 4).toString());
-                        frmFacturaB.txtImpuesto.setText(frmFacturaA.tblTabla.getValueAt(fila, 5).toString());
-                        frmFacturaB.txtSubTotal.setText(frmFacturaA.tblTabla.getValueAt(fila, 6).toString());
-                        frmFacturaB.txtTotal.setText(frmFacturaA.tblTabla.getValueAt(fila, 7).toString());
-
-                        frmFacturaB.setVisible(true);
-
-                    } else {
-                        JOptionPane.showMessageDialog(frmFacturaA, "Debe seleccionar un registro");
-                    }
-                    break;
+//                case "Editar":
+//                    if (frmFacturaA.tblTabla.getSelectedRowCount() == 1) {
+//
+//                        opcion = 2;
+//                        frmFacturaB.setTitle("Actualización de Factura");
+//                        frmFacturaB.txtIdFactura.setEnabled(false);
+//                        int fila = frmFacturaA.tblTabla.getSelectedRow();
+//                        factura.setIdFactura(Integer.parseInt(frmFacturaA.tblTabla.getValueAt(fila, 0).toString()));
+//                        frmFacturaB.txtIdFactura.setText(String.valueOf(frmFacturaA.tblTabla.getValueAt(fila, 0)));
+//                        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyy-MM-dd");
+//                        String FechaString = frmFacturaA.tblTabla.getValueAt(fila, 1).toString();
+//                        //string to date
+//                        LocalDate localDate = LocalDate.parse(FechaString, dateTimeFormatter);
+//                        frmFacturaB.txtFecha.setDate(localDate);
+//
+//                        frmFacturaB.txtOrdenTrabajo.setText(frmFacturaA.tblTabla.getValueAt(fila, 2).toString());
+//                        frmFacturaB.txtEmpleado.setText(frmFacturaA.tblTabla.getValueAt(fila, 3).toString());
+//                        frmFacturaB.txtCliente.setText(frmFacturaA.tblTabla.getValueAt(fila, 4).toString());
+//                        frmFacturaB.txtImpuesto.setText(frmFacturaA.tblTabla.getValueAt(fila, 5).toString());
+//                        frmFacturaB.txtSubTotal.setText(frmFacturaA.tblTabla.getValueAt(fila, 6).toString());
+//                        frmFacturaB.txtTotal.setText(frmFacturaA.tblTabla.getValueAt(fila, 7).toString());
+//
+//                        frmFacturaB.setVisible(true);
+//
+//                    } else {
+//                        JOptionPane.showMessageDialog(frmFacturaA, "Debe seleccionar un registro");
+//                    }
+                   // break;
 
                 case "Eliminar":
                     if (frmFacturaA.tblTabla.getSelectedRowCount() == 1) {
@@ -309,14 +309,14 @@ public class FacturaController implements WindowListener, ActionListener, KeyLis
                     } else {
                         JOptionPane.showMessageDialog(frmFacturaB, "Error al guardar");
                     }
-                } else {
-                    if (facturaModel.modificarFactura(factura)) {
-                        JOptionPane.showMessageDialog(frmFacturaB, "Factura Actualizado");
-                        frmFacturaB.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(frmFacturaB, "Error al editar");
-                    }
-                }
+                } 
+//                    if (facturaModel.modificarFactura(factura)) {
+//                        JOptionPane.showMessageDialog(frmFacturaB, "Factura Actualizado");
+//                        frmFacturaB.dispose();
+//                    } else {
+//                        JOptionPane.showMessageDialog(frmFacturaB, "Error al editar");
+//                    }
+               
                 break;
 
                 case "Limpiar":

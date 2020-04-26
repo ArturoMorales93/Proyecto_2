@@ -52,7 +52,7 @@ public class DetalleFacturaModel {
 
         try {
             db.conectar();
-            CallableStatement cst = db.getConexion().prepareCall("call pa_editarDetalleFactura(?)");
+            CallableStatement cst = db.getConexion().prepareCall("call pa_editarDetalleFactura(?,?,?,?,?,?,?)");
             //Parametros de entrada del procedimiento almacenado
             cst.setInt(1, detalleFactura.getIdDetalleFactura());
             cst.setInt(2, detalleFactura.getIdFactura());
