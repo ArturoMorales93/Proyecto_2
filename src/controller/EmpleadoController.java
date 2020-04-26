@@ -111,7 +111,6 @@ public class EmpleadoController implements ActionListener, WindowListener, Mouse
 
                         if (resp == 0) {
                             if (empleadoModel.eliminarEmpleado(empleado.getIdEmpleado())) {
-                                JOptionPane.showMessageDialog(frmA, "Empleado eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmA, "Error al eliminar");
                             }

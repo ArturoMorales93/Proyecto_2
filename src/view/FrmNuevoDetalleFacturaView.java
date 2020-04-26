@@ -69,9 +69,15 @@ public class FrmNuevoDetalleFacturaView extends javax.swing.JDialog {
 
         jLabel10.setText("Precio:");
 
+        txtPrecio.setEditable(false);
+        txtPrecio.setFocusable(false);
+
         jLabel2.setText("SubTotal:");
 
         jLabel3.setText("₡");
+
+        txtSubTotal.setEditable(false);
+        txtSubTotal.setFocusable(false);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Mantenimiento:");
@@ -158,7 +164,6 @@ public class FrmNuevoDetalleFacturaView extends javax.swing.JDialog {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnGuardar);
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clean.jpg"))); // NOI18N

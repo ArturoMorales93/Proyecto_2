@@ -27,7 +27,7 @@ public class DetalleFacturaModel {
             cst.setInt(1, detalleFactura.getIdDetalleFactura());
             cst.setInt(2, detalleFactura.getIdFactura());
             cst.setInt(3, detalleFactura.getCantidad());
-            cst.setInt(4, detalleFactura.getIdMantenimiento());
+            cst.setString(4, detalleFactura.getIdMantenimiento());
             cst.setInt(5, detalleFactura.getPrecio());
             cst.setInt(6, detalleFactura.getSubTotal());
 
@@ -57,7 +57,7 @@ public class DetalleFacturaModel {
             cst.setInt(1, detalleFactura.getIdDetalleFactura());
             cst.setInt(2, detalleFactura.getIdFactura());
             cst.setInt(3, detalleFactura.getCantidad());
-            cst.setInt(4, detalleFactura.getIdMantenimiento());
+            cst.setString(4, detalleFactura.getIdMantenimiento());
             cst.setInt(5, detalleFactura.getPrecio());
             cst.setInt(6, detalleFactura.getSubTotal());
 

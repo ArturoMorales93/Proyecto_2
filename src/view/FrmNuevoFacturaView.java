@@ -110,6 +110,12 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
 
         jLabel10.setText("Total:");
 
+        txtSubTotal.setEditable(false);
+        txtSubTotal.setFocusable(false);
+
+        txtTotal.setEditable(false);
+        txtTotal.setFocusable(false);
+
         jLabel12.setText("ID Factura");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -233,7 +239,6 @@ public class FrmNuevoFacturaView extends javax.swing.JDialog {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/save.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.setPreferredSize(new java.awt.Dimension(124, 54));
         jPanel2.add(btnGuardar);
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clean.jpg"))); // NOI18N

@@ -80,13 +80,15 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
     //Metodos
     public void limpiarFrmB() {
-        if (opcion==1) {
+        if (opcion == 1) {
             frmDetalleOrdenB.txtIdOrden.setText(null);
-            frmDetalleOrdenB.txtMantenimiento.setText(null);
-            frmDetalleOrdenB.txaObservaciones.setText(null);
-            frmDetalleOrdenB.txtPrecio.setText(null);
+            frmDetalleOrdenB.txtIdOrden.requestFocus();
+        } else {
             frmDetalleOrdenB.btnBuscarMantenimiento.requestFocus();
         }
+        frmDetalleOrdenB.txtMantenimiento.setText(null);
+        frmDetalleOrdenB.txaObservaciones.setText(null);
+        frmDetalleOrdenB.txtPrecio.setText(null);
     }
 
     @Override
@@ -189,12 +191,13 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
                         frmDetalleOrdenB.setTitle("Actualización de DetalleOrden");
                         frmDetalleOrdenB.txtIdOrden.setEnabled(false);
                         int fila = frmDetalleOrdenA.tblTabla.getSelectedRow();
+                        
                         detalleOrden.setIdDetalleOrden(Integer.parseInt(frmDetalleOrdenA.tblTabla.getValueAt(fila, 0).toString()));
                         frmDetalleOrdenB.txtIdOrden.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 0).toString());
                         frmDetalleOrdenB.txtOrden.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 1).toString());
                         frmDetalleOrdenB.txtMantenimiento.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 2).toString());
                         frmDetalleOrdenB.txtPrecio.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 3).toString());
-                        frmDetalleOrdenB.txtMantenimiento.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 4).toString());
+                        frmDetalleOrdenB.txaObservaciones.setText(frmDetalleOrdenA.tblTabla.getValueAt(fila, 4).toString());
 
                         frmDetalleOrdenB.setLocationRelativeTo(frmDetalleOrdenA.btnNuevo);
                         frmDetalleOrdenB.setVisible(true);
@@ -213,7 +216,6 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
                         if (resp == 0) {
                             if (detalleOrdenModel.eliminarDetalleOrden(detalleOrden.getIdDetalleOrden())) {
-                                JOptionPane.showMessageDialog(frmDetalleOrdenA, "DetalleOrden eliminado");
                             } else {
                                 JOptionPane.showMessageDialog(frmDetalleOrdenA, "Error al eliminar");
                             }
@@ -291,6 +293,7 @@ public class DetalleOrdenController implements WindowListener, ActionListener, K
 
                 int fila = frmMantenimientoA.tblTabla.getSelectedRow();
                 frmDetalleOrdenB.txtMantenimiento.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 0).toString());
+                frmDetalleOrdenB.txtPrecio.setText(frmMantenimientoA.tblTabla.getValueAt(fila, 2).toString());
                 frmMantenimientoA.dispose();
 
             }
